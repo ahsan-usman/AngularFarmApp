@@ -1,0 +1,30 @@
+<app-header></app-header>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+  
+      <h1 class="display-4 text-info" style="font-family: 'Poppins', sans-serif;">Sales and Weight Report</h1>
+      <p class="lead">All Records are displayed Here</p>
+      <!-- <p class="text-info mt-5" style="font-size:22px" #brd>Total Birds: {{birdss}}</p> -->
+      <hr class="my-4">
+  
+      <div class="row">
+        <div class="col-sm-3 mb-4">
+          <div class="card bg-success shadow">
+            <div class="card-body">
+              <h2 class="card-title text-light" style="font-family: 'Poppins', sans-serif;">Total Sales : </h2>
+              <!-- <h1 class="card-text text-light">{{totalSum}}</h1>         -->
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 mb-4">
+          <div class="card bg-warning shadow">
+            <div class="card-body">
+              <h2 class="card-title text-light" style="font-family: 'Poppins', sans-serif;">Total Weight : </h2>
+              <!-- <h1 class="card-text text-light">{{diesel}}</h1> -->
+            </div>
+          </div>
+        </div>
+    </div>
+    <button class="btn btn-info" (click)="openDialog()">Click Here To Add Data</button>
+  </div>
+

@@ -1,0 +1,45 @@
+<h1 class="display-4 text-center" style="font-family: 'Poppins', sans-serif;">Sales and Weight</h1>
+<div mat-dialog-content>
+   <form [formGroup]="feedFormDialog">
+    <mat-form-field appearance="outline">
+        <mat-label>Select Date</mat-label>
+        <input formControlName="date" matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <h1 class="display-4 text-center text-info">Feed Information</h1>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Total Feed</mat-label>
+        <input formControlName="feed" matInput type="number" placeholder="Enter Total Feed">
+        <mat-hint>Enter Feed here</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Used Feed</mat-label>
+        <input formControlName="usedFeed" matInput type="number" placeholder="Enter Used Feed">
+        <mat-hint>Enter Sales Details</mat-hint>
+    </mat-form-field>
+<!-- 
+    <mat-form-field appearance="outline">
+        <mat-label>Remaining Feed</mat-label>
+        <input formControlName="remainingFeed" matInput type="number" placeholder="Remaining Feed">
+        <mat-hint>remainingFeed</mat-hint>
+    </mat-form-field> -->
+
+    <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Note</mat-label>
+        <textarea formControlName="note" matInput placeholder="Enter Any Additional Information Here."></textarea>
+        <mat-hint>Any Additional Information</mat-hint>
+    </mat-form-field>
+   </form>
+</div>
+
+<div mat-dialog-actions [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+    <button style="margin-left: 8px;"  mat-raised-button color="primary" (click)="AddData()">Save</button>
+</div>
+<!-- 
+{{actionBtn}} -->
+
