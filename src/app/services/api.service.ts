@@ -23,4 +23,9 @@ export class ApiService {
   deleteData(id: number){
     return this.http.delete<any>("http://localhost:3000/FarmData/" +id)
   }
+
+  updateSignUp(data: any,id: number){
+    return this.http.put<any>("http://localhost:3000/signupUsers/" +id, data)
+  }
+
 }

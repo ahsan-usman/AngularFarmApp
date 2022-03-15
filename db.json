@@ -120,11 +120,18 @@
       "id": 1
     },
     {
-      "fullname": "abrar akhtar",
+      "fullname": "Abrar Akhtar",
       "contact": "03005622844",
       "email": "abrarakhtar27@gmail.com",
       "password": "1234",
       "id": 2
+    },
+    {
+      "fullname": "Haseeb Ur Rehman",
+      "contact": "03147714171",
+      "email": "haseeb@gmail.com",
+      "password": "123456",
+      "id": 3
     }
   ],
   "profile": {

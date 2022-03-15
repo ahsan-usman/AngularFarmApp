@@ -1,3 +1,6 @@
+import { ExpensesComponent } from './component/expenses/expenses.component';
+import { ContactUsComponent } from './component/contact-us/contact-us.component';
+import { UserProfileComponent } from './component/user-profile/user-profile.component';
 import { VaccineDialogComponent } from './component/vaccine-dialog/vaccine-dialog.component';
 import { FeedDialogComponent } from './component/feed-dialog/feed-dialog.component';
 import { SalesDialogComponent } from './component/sales-dialog/sales-dialog.component';
@@ -25,6 +28,9 @@ const routes: Routes = [
   {path: 'vaccineDialog', component: VaccineDialogComponent, canActivate:[ActivateGuardGuard]},
   {path: 'saleHome', component: SalesHomeComponent, canActivate:[ActivateGuardGuard]},
   {path: 'salesDailog', component: SalesDialogComponent, canActivate:[ActivateGuardGuard]},
+  {path: 'userProfile', component: UserProfileComponent, canActivate:[ActivateGuardGuard]},
+  {path: 'contactUs', component: ContactUsComponent, canActivate:[ActivateGuardGuard]},
+  {path: 'expenses', component: ExpensesComponent, canActivate:[ActivateGuardGuard]},
   {path: '**', component: CustomErrorComponent, canActivate:[ActivateGuardGuard]}
 ];
 

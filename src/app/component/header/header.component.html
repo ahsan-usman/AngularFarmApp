@@ -1,67 +1,104 @@
 <nav class="navbar navbar-expand-lg navbar-light p-3" style="background-color: #F0D9BD;">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand pl-5 pr-5" href="#">
-      <img src="https://sktperfectdemo.com/themepack/poultry/wp-content/themes/skt-poultry-farm/images/logo.png" class="d-inline-block align-top" alt="">
-    </a>
-    <!-- <a class="navbar-brand text-light pl-5" routerLink="/dashboard">Abrar Protein Farm</a> -->
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
-          <a class="nav-link text-dark ml-5" routerLink="/dashboard">Dashboard <span class="sr-only">(current)</span></a>
-        </li>
-    
-        <li class="nav-item">
-            <a class="nav-link text-dark ml-5" routerLink="/home">Home</a>
-        </li>
-        
-        <li class="nav-item">
+  <span class="threelines" style="font-size:30px;cursor:pointer;color: white;" (click)="openNav()">&#9776;</span>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+    aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand pl-5 pr-5" routerLink="/dashboard">
+    <img src="/assets/logo.png" class="d-inline-block align-top" alt="Farm Management System">
+  </a>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link text-dark ml-5" routerLink="/dashboard">Dashboard <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-dark ml-5" routerLink="/home">Home</a>
+      </li>
+
+      <li class="nav-item">
         <div class="dropdown">
-          <a class="nav-link text-dark ml-5 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link text-dark ml-5 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
             Calculator
           </a>
           <div class="dropdown-menu" cdkDrag>
             <form>
-              <div>  
+              <div>
                 <div class="calculator card">
-                    <div><input type="text" class="calculator-screen z-depth-1" value="{{input}}"/></div>
-                    <div><input type="text" class="calculator-screen z-depth-1" value="{{result}}"/></div>
-         
-                    <div class="calculator-keys">
-                
-                      <button type="button" class="operator btn btn-info" value="+" (click)="pressNum('+')">+</button>
-                      <button type="button" class="operator btn btn-info" value="-" (click)="pressNum('-')">-</button>
-                      <button type="button" class="operator btn btn-info" value="*" (click)="pressNum('*')">&times;</button>
-                      <button type="button" class="operator btn btn-info" value="/" (click)="pressNum('/')">&divide;</button>
-                
-                      <button type="button" value="7" class="btn btn-light waves-effect" (click)="pressNum('7')">7</button>
-                      <button type="button" value="8" class="btn btn-light waves-effect" (click)="pressNum('8')">8</button>
-                      <button type="button" value="9" class="btn btn-light waves-effect" (click)="pressNum('9')">9</button>          
-                
-                      <button type="button" value="4" class="btn btn-light waves-effect" (click)="pressNum('4')">4</button>
-                      <button type="button" value="5" class="btn btn-light waves-effect" (click)="pressNum('5')">5</button>
-                      <button type="button" value="6" class="btn btn-light waves-effect" (click)="pressNum('6')">6</button>
-                               
-                      <button type="button" value="1" class="btn btn-light waves-effect" (click)="pressNum('1')">1</button>
-                      <button type="button" value="2" class="btn btn-light waves-effect" (click)="pressNum('2')">2</button>
-                      <button type="button" value="3" class="btn btn-light waves-effect" (click)="pressNum('3')">3</button>
+                  <div><input type="text" class="calculator-screen z-depth-1" value="{{input}}" /></div>
+                  <div><input type="text" class="calculator-screen z-depth-1" value="{{result}}" /></div>
 
-                      <button type="button" value="0" class="btn btn-light waves-effect" (click)="pressNum('0')">0</button>
-                      <button type="button" class="decimal function btn btn-secondary" value="." (click)="pressNum('.')">.</button>
-                      <button type="button" class="all-clear function btn btn-danger btn-sm" value="all-clear" (click)="allClear()">AC</button>          
-                      <button type="button" class="equal-sign operator btn btn-default" value="=" (click)="getAnswer()">=</button>
-                    </div>
+                  <div class="calculator-keys">
+
+                    <button type="button" class="operator btn" style="background-color: #D8944E; color: white;"
+                      value="+" (click)="pressNum('+')">+</button>
+                    <button type="button" class="operator btn" style="background-color: #D8944E; color: white;"
+                      value="-" (click)="pressNum('-')">-</button>
+                    <button type="button" class="operator btn" style="background-color: #D8944E; color: white;"
+                      value="*" (click)="pressNum('*')">&times;</button>
+                    <button type="button" class="operator btn" style="background-color: #D8944E; color: white;"
+                      value="/" (click)="pressNum('/')">&divide;</button>
+
+                    <button type="button" value="7" class="btn btn-light waves-effect"
+                      (click)="pressNum('7')">7</button>
+                    <button type="button" value="8" class="btn btn-light waves-effect"
+                      (click)="pressNum('8')">8</button>
+                    <button type="button" value="9" class="btn btn-light waves-effect"
+                      (click)="pressNum('9')">9</button>
+
+                    <button type="button" value="4" class="btn btn-light waves-effect"
+                      (click)="pressNum('4')">4</button>
+                    <button type="button" value="5" class="btn btn-light waves-effect"
+                      (click)="pressNum('5')">5</button>
+                    <button type="button" value="6" class="btn btn-light waves-effect"
+                      (click)="pressNum('6')">6</button>
+
+                    <button type="button" value="1" class="btn btn-light waves-effect"
+                      (click)="pressNum('1')">1</button>
+                    <button type="button" value="2" class="btn btn-light waves-effect"
+                      (click)="pressNum('2')">2</button>
+                    <button type="button" value="3" class="btn btn-light waves-effect"
+                      (click)="pressNum('3')">3</button>
+
+                    <button type="button" value="0" class="btn btn-light waves-effect"
+                      (click)="pressNum('0')">0</button>
+                    <button type="button" class="decimal function btn btn-secondary" value="."
+                      (click)="pressNum('.')">.</button>
+                    <button type="button" class="all-clear function btn btn-danger btn-sm" value="all-clear"
+                      (click)="allClear()">AC</button>
+                    <button type="button" class="equal-sign operator btn btn-default" value="="
+                      (click)="getAnswer()">=</button>
                   </div>
-                </div>            
+                </div>
+              </div>
             </form>
           </div>
         </div>
       </li>
+    </ul>
+    <button class="btn pr-3" type="button" routerLink="/userProfile" style="font-size:20px; color: #282828;"><i
+        class="bi bi-person-circle pr-2"></i>{{UserName}}</button>
+    <button class="btn btn-outline-dark my-2 my-sm-0 mr-5 p-2" type="button" (click)="logOut()" routerLink="/login">Log
+      Out</button>
 
-      </ul>
-      
-        <button class="btn btn-outline-dark my-2 my-sm-0 mr-5 p-2" type="button" (click)="logOut()" routerLink="/login">Log Out</button>
-    </div>
-  </nav>
+  </div>
+</nav>
 
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <a routerLink="/home">Home</a>
+  <a routerLink="/dashboard">Dashboard</a>
+  <a routerLink="/feed">Feed Details</a>
+  <a routerLink="/vaccine">Vaccination Details</a>
+  <a routerLink="/saleHome">Sales & Weight Details</a>
+  <a routerLink="/expenses">Expenses Details</a>
+  <a routerLink="/userProfile">About Us</a>
+  <a routerLink="/contactUs">Contact Us</a>
+  <i style=" display: block;text-align: center;font-size: 25px; color: white; margin-top: 15px; cursor: pointer;"
+    class="bi bi-person-circle" routerLink="/userProfile"></i>
+  <div style="text-align: center;margin-top: 10px;">
+    <button class="btn text-center text-light" style="font-size:18px;" routerLink="/userProfile">{{UserName}}</button>
+  </div>
+</div>

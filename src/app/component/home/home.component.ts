@@ -6,8 +6,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
-
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,12 +13,9 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class HomeComponent implements OnInit, DoCheck {
 
-  displayedColumns: any[] = ['date', 'age', 'mortality', 'cumMortality', 'cumMortalityPercent', 'feed', 'usedFeed', 'cumFeed', 'diesel', 'cumDiesel','weight', 'note', 'action'];
+  displayedColumns: any[] = ['date', 'age', 'mortality', 'cumMortality', 'cumMortalityPercent', 'feed', 'usedFeed', 'cumFeed', 'diesel', 'cumDiesel', 'weight', 'note', 'action'];
   dataSource!: MatTableDataSource<any>;
-
   // totalBird: number =18000;
-
-
   totalSum: number = 0;
   totalFeed: number = 0;
   usedFeed: number = 0;
@@ -38,17 +33,13 @@ export class HomeComponent implements OnInit, DoCheck {
   Diesel: any;
   dieselCum: any;
 
-  weight: number= 0;
+  weight: number = 0;
 
   x: any[] = [];
   percent: any;
   cumMortalityPercent: any;
 
   birdss: any = "";
-
-  d = new Date();
-
-
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -58,22 +49,16 @@ export class HomeComponent implements OnInit, DoCheck {
     localStorage.setItem("birds", this.birdKey.nativeElement.value)
   }
 
-
   constructor(public dialog: MatDialog, private api: ApiService) {
-
   }
   ngOnInit(): void {
     // this.cumSum()
     this.getAllData()
-
   }
 
   ngDoCheck() {
     this.birdss = localStorage.getItem("birds")!;
-
-
   }
-
   openDialog() {
     this.dialog.open(DialogComponent, {
       width: '50%',
@@ -94,7 +79,7 @@ export class HomeComponent implements OnInit, DoCheck {
             this.dataSource.sort = this.sort;
             this.dataSource.paginator = this.paginator;
           });
-   
+
           //for calculating Sum
           this.totalSum = 0;
           console.log(this.dataSource.data.map(d => {
@@ -104,7 +89,7 @@ export class HomeComponent implements OnInit, DoCheck {
 
           //for weight total
           this.weight = 0;
-          this.dataSource.data.map(w=>{
+          this.dataSource.data.map(w => {
             this.weight += w.weight;
           })
 
@@ -228,6 +213,15 @@ export class HomeComponent implements OnInit, DoCheck {
 
   print() {
     window.print()
+  }
+  openNav() {
+    document.getElementById("mySidenav")!.style.width = "250px";
+    document.getElementById("main")!.style.marginLeft = "250px";
+  }
+
+  closeNav() {
+    document.getElementById("mySidenav")!.style.width = "0";
+    document.getElementById("main")!.style.marginLeft = "0";
   }
 
 

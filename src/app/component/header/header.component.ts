@@ -6,13 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  UserData:any;
+  UserName:any;
   input: string = '';
   result: string = '';
 
   constructor() { }
 
   ngOnInit(): void {
+    this.UserData = JSON.parse(localStorage.getItem("userData")!);
+    this.UserName = this.UserData.fullname;
   }
 
   pressNum(num: string) {
@@ -107,5 +110,17 @@ export class HeaderComponent implements OnInit {
   public logOut(){
     localStorage.removeItem("userData")
   }
- 
+  openNav() {
+    document.getElementById("mySidenav")!.style.width = "250px";
+    document.getElementById("main")!.style.marginLeft = "250px";
+  }
+  
+  closeNav() {
+    document.getElementById("mySidenav")!.style.width = "0";
+    document.getElementById("main")!.style.marginLeft= "0";
+  }
+
+
 }
+
+

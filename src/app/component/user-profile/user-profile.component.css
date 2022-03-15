@@ -1,0 +1,52 @@
+*{
+    font-family: 'Raleway','Assistant';
+    font-weight: 500;
+}
+h4{
+    font-size: 25px;
+    font-family: 'Raleway';
+    font-weight: 600;
+}
+
+body {
+    background: #d8944e;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #d8944e
+}
+
+.profile-button {
+    background: d8944e;
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #d8944e
+}
+
+.profile-button:focus {
+    background: #d8944e;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #d8944e;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #d8944e;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 17px;
+    color: #282828;
+    font-family: 'Assistant';
+    margin-top: 20px;
+    font-weight: 600;
+}
+

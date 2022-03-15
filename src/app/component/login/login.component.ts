@@ -1,10 +1,8 @@
 import { GuardServiceService } from './../../services/guard-service.service';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import {NgToastService} from 'ng-angular-popup' 
-
+import { NgToastService } from 'ng-angular-popup'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,46 +13,44 @@ export class LoginComponent implements OnInit {
   loginForm !: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-     private http: HttpClient,
-     private router: Router,
-     private toast: NgToastService,
-     private guardServiceService: GuardServiceService) { }
+    private router: Router,
+    private toast: NgToastService,
+    private guardServiceService: GuardServiceService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      email:[''],
-      password:['']
-
+      email: [''],
+      password: ['']
     })
   }
 
-  bottomRight(){
-    this.toast.success({detail:"Success Message", summary:"User Login Successful", duration: 1000,position:'br',})
- }
- 
+  bottomRight() {
+    this.toast.success({ detail: "Success Message", summary: "User Login Successful", duration: 3000, position: 'br'})
+  }
 
-  onLogin(){
+
+  onLogin() {
     let email = this.loginForm.value.email
-    if(!email){
+    if (!email) {
       return
     }
     this.guardServiceService.loginCall(email)
-    .subscribe((res:[]) => {
-      const user = res.find((a: any) => a.email === this.loginForm.value.email && a.password === this.loginForm.value.password);
-      
-      if(user){
-        localStorage.setItem("userData",JSON.stringify(user))
-        this.bottomRight();
-        this.loginForm.reset()
-        this.router.navigate(['dashboard'])
-      }else{
-        this.toast.warning({detail:"Warning Message", summary:"User Not Found", duration: 5000});
+      .subscribe((res: []) => {
+        const user = res.find((a: any) => a.email === this.loginForm.value.email && a.password === this.loginForm.value.password);
+
+        if (user) {
+          localStorage.setItem("userData", JSON.stringify(user))
+          this.bottomRight();
+          this.loginForm.reset()
+          this.router.navigate(['dashboard'])
+        } else {
+          this.toast.warning({ detail: "Warning Message", summary: "User Not Found", duration: 5000 });
+        }
+      }, err => {
+        this.toast.info({ detail: "Info Message", summary: "Something went wrong", duration: 5000 })
       }
-    },err => {
-      this.toast.info({detail:"Info Message", summary:"Something went wrong", duration: 5000})
-    }
-    )
-    
+      )
+
   }
 
 }
