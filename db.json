@@ -109,6 +109,17 @@
       "weight": 100,
       "note": "",
       "id": 10
+    },
+    {
+      "date": "2022-03-29T19:00:00.000Z",
+      "age": "15",
+      "mortality": 505,
+      "feed": 105,
+      "usedFeed": 55,
+      "diesel": 107,
+      "weight": 55,
+      "note": "nothing new",
+      "id": 11
     }
   ],
   "signupUsers": [
@@ -132,6 +143,20 @@
       "email": "haseeb@gmail.com",
       "password": "123456",
       "id": 3
+    },
+    {
+      "fullname": "Altaf Hussain",
+      "contact": "03145565656",
+      "email": "altaf@gmail.com",
+      "password": "123",
+      "id": 4
+    },
+    {
+      "fullname": "usman",
+      "contact": "03551414141",
+      "email": "usmankhan0@gmail.com",
+      "password": "123",
+      "id": 5
     }
   ],
   "profile": {

@@ -1,0 +1,65 @@
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <span class="">
+
+            <!-- <button style="background-color: transparent; border-radius: 5px; border-color: wheat; margin-bottom: 20px; ">
+              <select #langSelect (change)="translate.use(langSelect.value)"
+                style="background-color: transparent; color: #282828; border: none; outline: none;">
+                <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{
+                  lang }}</option>
+              </select>
+            </button> -->
+          
+            <h1>{{ 'HOME.SIGNUP' | translate }}</h1>
+            <h6>{{ 'HOME.SIGNUPHEAD' | translate }}</h6>
+          </span>
+          <form [formGroup]="signupForm" (ngSubmit)="signUp()">
+            <div class="form-group">
+              <label for="exampleInputName">{{'HOME.NAME' | translate }}</label>
+              <input type="text" formControlName="fullname" class="form-control" id="exampleInputName"
+                placeholder="{{'HOME.ENTERNAME' | translate }}">
+              <span class="text-danger"
+                *ngIf="signupForm.controls['fullname'].dirty && signupForm.hasError('required','fullname')"> * Name is
+                Required</span>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPhone">{{'HOME.CONTACT' | translate }}</label>
+              <input formControlName="contact" type="text" class="form-control" id="exampleInputPhone"
+                placeholder="{{'HOME.ENTERCONTACT' | translate }}">
+              <span class="text-danger"
+                *ngIf="signupForm.controls['contact'].dirty && signupForm.hasError('required','contact')"> * Contact is
+                Required</span>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">{{'HOME.EMAIL' | translate }}</label>
+              <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="{{'HOME.ENTEREMAIL' | translate }}">
+              <span class="text-danger"
+                *ngIf="signupForm.controls['email'].dirty && signupForm.hasError('required','email')"> * Email is
+                Required</span>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">{{'HOME.PASSWORD' | translate }}</label>
+              <input formControlName="password" type="password" class="form-control" id="exampleInputPassword1"
+                placeholder="{{'HOME.ENTERPASSWORD' | translate }}">
+              <span class="text-danger"
+                *ngIf="signupForm.controls['password'].dirty && signupForm.hasError('required','password')"> * Password
+                is Required</span>
+            </div>
+
+            <button type="submit" class="btn btn-block " id="btn" [disabled]='!signupForm.valid'>{{ 'HOME.SIGNUP' | translate }}</button>
+
+
+            <h2 style="color: #282828; text-align: center; margin: 10px;">{{ 'HOME.OR' | translate }}</h2>
+
+            <button type="submit" class="btn btn-block" id="btnn" routerLink='/mainapp/login'>{{ 'HOME.HAVEACCOUNT' | translate }}</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

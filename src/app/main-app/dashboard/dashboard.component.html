@@ -1,0 +1,74 @@
+<div id="main">
+    <app-header></app-header>
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="containerSlider">
+                <div class="centered">
+                    <p id="title">{{ 'HOME.HEADING' | translate }}</p>
+                    <p class="sub">{{ 'HOME.HEADING1' | translate }}</p>
+                    <p class="sub">{{ 'HOME.HEADING2' | translate }}</p>
+                </div>
+                <img class="d-block w-100" src="/assets/slider1.jpg" alt="First slide">
+            </div>
+        </div>
+        <h1>{{ 'HOME.RECORDS' | translate }}</h1>
+
+        <div class="container-fluid">
+            <div class="row">
+                <ng-template #jump let-data let-n="name" let-d="data" let-i="image">
+                    <div class="col-md-3 col-sm-4">
+                        <div class="a-box">
+                            <div class="img-container">
+                                <div class="img-inner">
+                                    <div class="inner-skew">
+                                        <img src={{i}}>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-container">
+                                <h3>{{n}}</h3>
+                                <div>
+                                    {{d}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+                
+                <div routerLink="/mainapp/home">
+                    <ng-container
+                        *ngTemplateOutlet="jump; context:{name: ('HOME.DAILYRECORDS' | translate), data: ('HOME.DAILYRECORDSDETAIL' | translate), image: 'assets/DailyRecord.jpg'}">
+                    </ng-container>
+                </div>
+                <div routerLink="/mainapp/feed">
+                    <ng-container
+                        *ngTemplateOutlet="jump; context:{name: ('HOME.FEED' | translate), data: ('HOME.FEEDDETAIL' | translate), image:'assets/feed.jpg'}">
+                    </ng-container>
+                </div>
+                <div routerLink="/mainapp/saleHome">
+                    <ng-container
+                        *ngTemplateOutlet="jump; context:{name: ('HOME.SALES' | translate), data: ('HOME.SALESDETAIL' | translate), image: 'assets/saleRecord.jpg'}">
+                    </ng-container>
+                </div>
+                <div routerLink="/mainapp/vaccine">
+                    <ng-container
+                        *ngTemplateOutlet="jump; context:{name: ('HOME.VACCINATION' | translate), data: ('HOME.VACCINATIONDETAIL' | translate), image: 'assets/vaccine.jpg'}">
+                    </ng-container>
+                </div>
+                <div routerLink="/mainapp/expenses">
+                    <ng-container
+                        *ngTemplateOutlet="jump; context:{name:('HOME.EXPENSES' | translate), data: ('HOME.EXPENSESDETAIL' | translate), image: 'assets/expense.jpg'}">
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+        <div id="map">
+            <google-map height="450px" width="100%" [zoom]="zoom" [center]="center" [options]="options">
+                <map-marker *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
+                    [title]="marker.title" [options]="marker.options">
+                </map-marker>
+            </google-map>
+        </div>
+        <app-footer></app-footer>
+    </div>

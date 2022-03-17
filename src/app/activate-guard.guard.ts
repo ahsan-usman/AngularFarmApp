@@ -18,7 +18,7 @@ export class ActivateGuardGuard implements CanActivate {
       }
       else{
         this.toast.error({detail:"Error Message", summary: "you don't have permission, Back to login", duration: 5000})
-        this.router.navigate(['login']);
+        this.router.navigate(['mainapp/login']);
 
       }
     return true;
