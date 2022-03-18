@@ -30,6 +30,13 @@ body {
   margin-top: 30px;
 } 
 
+[dir="rtl"].card h1 {
+  text-align: left;
+}
+[dir="ltr"].card h1 {
+  text-align: right;
+}
+
 .card h1{
   color: #262525;
   font-size: 60px;

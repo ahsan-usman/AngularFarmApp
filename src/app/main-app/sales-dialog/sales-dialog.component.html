@@ -1,4 +1,4 @@
-<h1 class="display-4 text-center" style="font-family: 'Poppins', sans-serif;">Sales and Weight</h1>
+<h1 class="display-4 text-center" style="font-family: 'Assitant', sans-serif;">Sales and Weight</h1>
 <div mat-dialog-content>
    <form [formGroup]="saleForm">
     <mat-form-field appearance="outline">
@@ -14,7 +14,11 @@
         <mat-hint>{{age.value.length}} / 2</mat-hint>
     </mat-form-field>
 
-    <h1 class="display-4 text-center text-info">Weight Information</h1>
+    <mat-form-field appearance="outline">
+        <mat-label>Truck Number</mat-label>
+        <input formControlName="truckNumber" matInput type="text" placeholder="Enter Truck Number">
+        <mat-hint>Enter Truck Number Here</mat-hint>
+    </mat-form-field>
 
     <mat-form-field appearance="outline">
         <mat-label>weight</mat-label>
@@ -22,37 +26,11 @@
         <mat-hint>Enter weight here</mat-hint>
     </mat-form-field>
 
-    <h1 class="display-4 text-center text-info">Sales Details</h1>
-
     <mat-form-field appearance="outline">
-        <mat-label>Sale</mat-label>
-        <input formControlName="sale" matInput type="number" placeholder="Enter Sales">
-        <mat-hint>Enter Sales Details</mat-hint>
+        <mat-label>Total Birds Sold</mat-label>
+        <input formControlName="sold" matInput type="number" placeholder="Enter Total Sold Bird">
+        <mat-hint>Total Sold</mat-hint>
     </mat-form-field>
-
-    <mat-form-field appearance="outline">
-        <mat-label>Truck No</mat-label>
-        <input formControlName="truckNo" matInput type="number" placeholder="Enter Truck Number">
-        <mat-hint>Used Truck Number</mat-hint>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-        <mat-label>Before loading</mat-label>
-        <input formControlName="beforeLoading" matInput type="number" placeholder="Enter Weight Before Loading">
-        <mat-hint>Enter weight before loading</mat-hint>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-        <mat-label>After loading</mat-label>
-        <input formControlName="afterLoading" matInput type="number" placeholder="Enter Weight After Loading">
-        <mat-hint>Enter weight after Loading</mat-hint>
-    </mat-form-field>
-
-    <!-- <mat-form-field appearance="outline">
-        <mat-label>Net Weight</mat-label>
-        <input formControlName="netWeight" matInput type="number" placeholder="Net Weight">
-        <mat-hint>Net weight</mat-hint>
-    </mat-form-field> -->
 
     <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Note</mat-label>
@@ -66,6 +44,4 @@
     <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
     <button style="margin-left: 8px;"  mat-raised-button color="primary" (click)="AddData()">Save</button>
 </div>
-<!-- 
-{{actionBtn}} -->
 

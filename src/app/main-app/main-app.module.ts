@@ -2,14 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainAppRoutingModule } from './main-app-routing.module';
 import { Custom1Pipe } from '../pipe/custom1.pipe';
-import { ContactUsComponent } from './contact-us/contact-us.component';
 import { CustomErrorComponent } from './custom-error/custom-error.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { ExpensesComponent } from './expenses/expenses.component';
 import { FeedDialogComponent } from './feed-dialog/feed-dialog.component';
 import { FeedComponent } from './feed/feed.component';
-import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -36,24 +34,22 @@ import { MatTableModule } from '@angular/material/table';
 import { NgToastModule } from 'ng-angular-popup';
 import { ActivateGuardGuard } from '../activate-guard.guard';
 import { GuardServiceService } from '../services/guard-service.service';
-
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { ExpenseDialogComponent } from './expense-dialog/expense-dialog.component';
 
-console.log("app module")
 
 export function HttpLoaderFactoryMainApp(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
-console.log("mainApp Module")
+console.log("MAIN Module")
 @NgModule({
   declarations: [
     LoginComponent,
     SignupComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent,
     DialogComponent,
     CustomErrorComponent,
     Custom1Pipe,
@@ -65,8 +61,8 @@ console.log("mainApp Module")
     FeedDialogComponent,
     VaccineDialogComponent,
     UserProfileComponent,
-    ContactUsComponent,
     ExpensesComponent,
+    ExpenseDialogComponent,
   ],
   imports: [
     CommonModule,

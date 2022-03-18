@@ -26,6 +26,7 @@ import { CommonModule } from '@angular/common';
 
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { FooterComponent } from './component/footer/footer.component';
 
 console.log("app module")
 
@@ -36,6 +37,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,

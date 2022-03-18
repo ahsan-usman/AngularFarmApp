@@ -1,0 +1,63 @@
+{
+    "JOME": {
+        "SELECT": "Change language",
+        "TITLE": "Farm Management System",
+        "DASHBOARD": "Dashboard"
+    },
+    "HOME": {
+        "CALCULATOR": "Calculator",
+        "LOGOUT": "Log Out",
+        "HEADING": "Farm",
+        "HEADING1": "Management",
+        "HEADING2": "System",
+        "RECORDS": "RECORDS",
+        "DAILYRECORDS": "Daily Records",
+        "FEED": "Feed",
+        "SALES": "Sales / Weight",
+        "VACCINATION": "Vaccination"
+    },
+    "NEW": {
+        "EXPENSES": "Daily Expenses",
+        "ABOUTUS": "About Us",
+        "CONTACTUS": "Contact Us",
+        "BLOG": "Blog",
+        "MORTALITY": "Mortality",
+        "DIESELUSED": "Diesel Consumed",
+        "TOTALFEED": "Total Feed"
+ 
+    },
+    "HASEE": {
+        "FEEDDETAIL": "View or Update Feed Records here",
+        "SALESDETAIL": "View Sales and Weight Records",
+        "VACCINATIONDETAIL": "View or Update Vaccination Records",
+        "EXPENSESDETAIL": "View/Update Daily Expenses Records",
+        "TEXTILEMODULECOMPONENT": "Textile module component",
+        "DETAILSMODULE": "details module",
+        "TOTALUSEDFEED": "Total Feed Used",
+        "TOTALWEIGHT": "Total Weight",
+        "DAILYRECORDSDETAIL": "View/Update Daily Chicken Records"
+    },
+    "JAN": {
+        "NOACCOUNT": "Don't Have an Account? Register Here",
+        "OR": "OR",
+        "ENTEREMAIL": "Enter Email Address",
+        "ENTERPASSWORD": "Enter Password",
+        "SIGNUP": "Sign Up",
+        "SIGNUPHEAD": "Please Enter Your Details",
+        "NAME": "Name",
+        "CONTACT": "Contact",
+        "ENTERNAME": "Enter Name",
+        "ENTERCONTACT": "Enter Contact Number",
+        "HAVEACCOUNT": "Already Have an Account? Log in",
+        "TOTALBIRDS": "Total Birds"
+    },
+    "CHEM": {
+        "ENTERTOTALBIRDS": "Enter Total Birds",
+        "ADDDATA": "Click here to Add Data",
+        "PRINT": "Print All Records",
+        "LOGIN": "Login",
+        "LOGINHEAD": "Please enter Email & Password",
+        "EMAIL": "Email address",
+        "PASSWORD": "Password"
+    }
+}

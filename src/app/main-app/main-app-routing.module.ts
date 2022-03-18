@@ -1,8 +1,8 @@
+import { ExpenseDialogComponent } from './expense-dialog/expense-dialog.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ActivateGuardGuard } from '../activate-guard.guard';
-import { ContactUsComponent } from './contact-us/contact-us.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ExpensesComponent } from './expenses/expenses.component';
 import { FeedDialogComponent } from './feed-dialog/feed-dialog.component';
@@ -27,8 +27,8 @@ const routes: Routes = [
   {path: 'saleHome', component: SalesHomeComponent, canActivate:[ActivateGuardGuard]},
   {path: 'salesDailog', component: SalesDialogComponent, canActivate:[ActivateGuardGuard]},
   {path: 'userProfile', component: UserProfileComponent, canActivate:[ActivateGuardGuard]},
-  {path: 'contactUs', component: ContactUsComponent, canActivate:[ActivateGuardGuard]},
   {path: 'expenses', component: ExpensesComponent, canActivate:[ActivateGuardGuard]},
+  {path: 'expensesDialog', component: ExpenseDialogComponent, canActivate:[ActivateGuardGuard]},
 ];
 
 @NgModule({

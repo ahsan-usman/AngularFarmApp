@@ -4,19 +4,11 @@
       <div class="col-md-6">
         <div class="card">
           <div class="">
-
-            <!-- <button style="background-color: transparent; border-radius: 5px; border-color: wheat; ">
-              <select #langSelect (change)="translate.use(langSelect.value)"
-                style="background-color: transparent; color: #282828; border: none; outline: none;">
-                <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{
-                  lang }}</option>
-              </select>
-            </button>
-             -->
             <a class="navbar-brand" style="display: flex;justify-content: center; margin-bottom: 20px;">
               <img src="/assets/logo.png">
             </a>
-            <i class="bi bi-arrow-left-square" style="color: #282828; font-size:28px; cursor: pointer;" routerLink=""></i>
+            <i class="bi bi-arrow-left-square" style="color: #282828; font-size:28px; cursor: pointer;"
+              routerLink=""></i>
             <h1 style="margin-top:20px;">{{ 'HOME.LOGIN' | translate }}</h1>
             <h6>{{ 'HOME.LOGINHEAD' | translate }}</h6>
           </div>
@@ -36,7 +28,8 @@
 
             <h2 style="color: #282828; text-align: center; margin: 10px;">{{ 'HOME.OR' | translate }}</h2>
 
-            <button type="submit" class="btn btn-block" id="btnn" routerLink='/mainapp/signup'>{{ 'HOME.NOACCOUNT' | translate }}</button>
+            <button type="submit" class="btn btn-block" id="btnn" routerLink='/mainapp/signup'>{{ 'HOME.NOACCOUNT' |
+              translate }}</button>
 
           </form>
 

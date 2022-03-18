@@ -3,3 +3,14 @@ nav{
     font-size: 16px;
     font-weight: 600;
 }  
+
+@media screen and (max-width: 450px) {
+    .sidenav {display: none;}
+    .sidenav a {display: none;}
+    .threelines {display: none;}
+    .calculator-screen { height: 80px;}
+  }
+  
+  @media screen and (max-width: 900px) {
+    .threelines {display: none;}
+  }

@@ -7,14 +7,14 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
   constructor(public translate: TranslateService) {
-    translate.addLangs(['english', 'urdu']);
+    translate.addLangs(['english', 'urdu','arabic']);
     translate.setDefaultLang('english');
 
     const browserLang = translate.getBrowserLang()!;
-    translate.use(browserLang.match(/english|urdu/) ? browserLang : 'english');
-   }
+    translate.use(browserLang.match(/english|urdu|arabic/) ? browserLang : 'english');
+
+  }
 
   title = 'Farm';
   // constructor(private HttpClient: HttpClient){

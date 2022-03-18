@@ -1,3 +1,5 @@
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainHomeRoutingModule } from './main-home-routing.module';
@@ -9,19 +11,22 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+console.log("i am main home module")
 
 export function HttpLoaderFactoryMainHome(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
-console.log("i am main home module")
+
 @NgModule({
   declarations: [
     HomePageComponent,
-    HomeHeaderComponent
+    HomeHeaderComponent,
+    ContactUsComponent
   ],
   imports: [
     CommonModule,
     MainHomeRoutingModule,
+    GoogleMapsModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

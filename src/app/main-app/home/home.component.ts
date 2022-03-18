@@ -1,7 +1,7 @@
 import { ApiService } from './../../services/api.service';
 import { DialogComponent } from './../dialog/dialog.component';
 import { Component, OnInit, ViewChild, ElementRef, DoCheck } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit, DoCheck {
 
   displayedColumns: any[] = ['date', 'age', 'mortality', 'cumMortality', 'cumMortalityPercent', 'feed', 'usedFeed', 'cumFeed', 'diesel', 'cumDiesel', 'weight', 'note', 'action'];
   dataSource!: MatTableDataSource<any>;
-  // totalBird: number =18000;
   totalSum: number = 0;
   totalFeed: number = 0;
   usedFeed: number = 0;
@@ -33,13 +32,13 @@ export class HomeComponent implements OnInit, DoCheck {
   Diesel: any;
   dieselCum: any;
 
-  weight: number = 0;
+  Weight: number = 0;
 
   x: any[] = [];
   percent: any;
   cumMortalityPercent: any;
 
-  birdss: any = "";
+  birdss: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -88,10 +87,11 @@ export class HomeComponent implements OnInit, DoCheck {
           console.log("sum of Mortality: ", this.totalSum)
 
           //for weight total
-          this.weight = 0;
+          this.Weight = 0;
           this.dataSource.data.map(w => {
-            this.weight += w.weight;
+            this.Weight += w.weight;
           })
+          console.log("helllloooooo i am weight", this.Weight)
 
           //for total feed
           this.totalFeed = 0;

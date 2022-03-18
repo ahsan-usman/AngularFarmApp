@@ -12,25 +12,27 @@
           <div class="row align-items-stretch">
             <div class="c-dashboardInfo col-lg-3 col-md-6">
               <div class="wrap">
-                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">{{'HOME.MORTALITY' | translate}}</h4><span
-                  class="hind-font caption-12 c-dashboardInfo__count">{{totalSum}}</span>
+                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">{{'HOME.MORTALITY' |
+                  translate}}</h4><span class="hind-font caption-12 c-dashboardInfo__count">{{totalSum}}</span>
               </div>
             </div>
             <div class="c-dashboardInfo col-lg-3 col-md-6">
               <div class="wrap">
-                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">{{'HOME.DIESELUSED' | translate}}</h4>
+                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">{{'HOME.DIESELUSED' |
+                  translate}}</h4>
                 <span class="hind-font caption-12 c-dashboardInfo__count">{{diesel}}</span>
               </div>
             </div>
             <div class="c-dashboardInfo col-lg-3 col-md-6">
               <div class="wrap">
-                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">{{'HOME.TOTALFEED' | translate}}</h4><span
-                  class="hind-font caption-12 c-dashboardInfo__count">{{totalFeed}}</span>
+                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">{{'HOME.TOTALFEED' |
+                  translate}}</h4><span class="hind-font caption-12 c-dashboardInfo__count">{{totalFeed}}</span>
               </div>
             </div>
             <div class="c-dashboardInfo col-lg-3 col-md-6">
               <div class="wrap">
-                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">{{'HOME.TOTALUSEDFEED' | translate}}</h4>
+                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">{{'HOME.TOTALUSEDFEED'
+                  | translate}}</h4>
                 <span class="hind-font caption-12 c-dashboardInfo__count">{{usedFeed}}</span>
               </div>
             </div>
@@ -43,8 +45,8 @@
           <div class="row align-items-stretch">
             <div class="c-dashboardInfo col-lg-3 col-md-6">
               <div class="wrap">
-                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">{{'HOME.TOTALWEIGHT' | translate}}</h4><span
-                  class="hind-font caption-12 c-dashboardInfo__count">{{weight}}</span>
+                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">{{'HOME.TOTALWEIGHT' |
+                  translate}}</h4><span class="hind-font caption-12 c-dashboardInfo__count">{{Weight}}</span>
               </div>
             </div>
           </div>
@@ -57,14 +59,16 @@
           <input #birds matInput placeholder="Total Bird">
           <mat-hint>{{'HOME.ENTERTOTALBIRDS' | translate}}</mat-hint>
         </mat-form-field>
-        <button class="btn mb-3 text-light" style="background-color: #D8944E;" (click)="SelectBird()">{{'HOME.ENTERTOTALBIRDS' | translate}}</button>
+        <button class="btn mb-3 text-light" style="background-color: #D8944E;"
+          (click)="SelectBird()">{{'HOME.ENTERTOTALBIRDS' | translate}}</button>
       </div>
     </div>
   </div>
 
   <div class="container">
     <div style="margin-top: 10px ;">
-      <button class="btn text-light" style="background-color: #D8944E;" (click)="openDialog()">{{'HOME.ADDDATA' | translate}}</button>
+      <button class="btn text-light" style="background-color: #D8944E;" (click)="openDialog()">{{'HOME.ADDDATA' |
+        translate}}</button>
       <mat-form-field appearance="standard">
         <mat-label>Search</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Search Here" #input>
@@ -157,9 +161,9 @@
         </table>
         <mat-paginator [pageSizeOptions]="[40, 80, 120, 160]" aria-label="Select page of users"></mat-paginator>
       </div>
-      <button class="btn text-light mt-5 mb-5" style="background-color: #D8944E;" (click)="print()">{{'HOME.PRINT' | translate}}</button>
+      <button class="btn text-light mt-5 mb-5" style="background-color: #D8944E;" (click)="print()">{{'HOME.PRINT' |
+        translate}}</button>
 
     </div>
   </div>
-  <app-footer></app-footer>
 </div>

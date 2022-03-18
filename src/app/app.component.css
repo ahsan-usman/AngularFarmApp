@@ -1,9 +1,8 @@
 #TopBar{
     background-color: #d8934ee1;
     color: #282828;
-    height: 35px;
-    padding-right: 150px;
-    padding-left: 150px;
+    height: auto;
+    padding: 10px 150px ;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -42,3 +41,33 @@ i{
     padding-right: 10px;
     padding-left: 10px;
 }
+
+@media screen and (max-width: 550px) {
+    #TopBar{
+        height: auto;
+        padding:10px 10px;
+    }
+    #TopBarContact{display: none;}
+    .vl {display: none;}
+    .notimp{
+    display: block;
+    margin: 5px;}
+}
+
+@media screen and (max-width: 900px){
+    #TopBar{
+        height: auto;
+        padding:10px 10px;
+    }
+    #TopBarContact{
+        display: block;
+        margin: 10px;}
+    .vl {display: none;}
+
+    .notimp{
+        display: block;
+        margin: 5px;
+    }
+    
+}
+  

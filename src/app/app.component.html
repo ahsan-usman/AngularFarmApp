@@ -11,38 +11,35 @@
     </span>
 
     <span id="TopBarContent">
-        <span>
-           
-            <i class="bi bi-translate"  style="font-style: normal; font-family: 'Raleway','Assistant'; font-weight: 500;"> {{'HOME.SELECT'|translate}}</i>
+        <span class="lanuguage">
+            <i class="bi bi-translate"
+                style="font-style: normal; font-family: 'Raleway','Assistant'; font-weight: 500;">
+                {{'HOME.SELECT'|translate}}</i>
             <span class="TopBarContentText">
                 <select #langSelect (change)="translate.use(langSelect.value)"
-                  style="background-color: transparent; color: white; border: none; outline: none; width: 16px; cursor: pointer;">
-                  <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang" style="color: #282828;">{{
-                    lang }}</option>
+                    style="background-color: transparent; color: white; border: none; outline: none; width: 15px; cursor: pointer;">
+                    <option *ngFor="let lang of translate.getLangs()" [value]="lang"
+                        [selected]="lang === translate.currentLang" style="color: #282828;">{{
+                        lang }}</option>
                 </select>
             </span>
-        
-            
         </span>
+
         <span class="vl"></span>
-        <span>
+        <span class="notimp">
             <i class="bi bi-person"></i>
-            <span class="TopBarContentText"   routerLink="/mainapp/login" style="cursor: pointer;">{{'HOME.LOGIN'|translate}}</span>
+            <span class="TopBarContentText" routerLink="/mainapp/login"
+                style="cursor: pointer;">{{'HOME.LOGIN'|translate}}</span>
         </span>
         <span class="vl"></span>
-        <span>
+        <span class="notimp">
             <i class="bi bi-pencil"></i>
-            <span class="TopBarContentText" routerLink="/mainapp/signup" style="cursor: pointer;">{{'HOME.SIGNUP'|translate}}</span>
+            <span class="TopBarContentText" routerLink="/mainapp/signup"
+                style="cursor: pointer;">{{'HOME.SIGNUP'|translate}}</span>
         </span>
     </span>
 </div>
-
-
-
-
-
-
 <router-outlet></router-outlet>
+
 <lib-ng-toast></lib-ng-toast>
-
-
+<app-footer></app-footer>

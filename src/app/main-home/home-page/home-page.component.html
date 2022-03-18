@@ -1,1 +1,23 @@
 <app-home-header></app-home-header>
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="containerSlider">
+            <div class="centered">
+                <p id="title">{{ 'HOME.HEADING' | translate }}</p>
+                <p class="sub">{{ 'HOME.HEADING1' | translate }}</p>
+                <p class="sub">{{ 'HOME.HEADING2' | translate }}</p>
+            </div>
+            <img class="d-block w-100" src="/assets/slider1.jpg" alt="First slide">
+        </div>
+    </div>
+    <h1>{{ 'HOME.RECORDS' | translate }}</h1>
+
+  
+
+    <div id="map">
+        <google-map height="450px" width="100%" [zoom]="zoom" [center]="center" [options]="options">
+            <map-marker *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
+                [title]="marker.title" [options]="marker.options">
+            </map-marker>
+        </google-map>
+    </div>

@@ -4,16 +4,9 @@
       <div class="col-md-6">
         <div class="card">
           <span class="">
-
-            <!-- <button style="background-color: transparent; border-radius: 5px; border-color: wheat; margin-bottom: 20px; ">
-              <select #langSelect (change)="translate.use(langSelect.value)"
-                style="background-color: transparent; color: #282828; border: none; outline: none;">
-                <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{
-                  lang }}</option>
-              </select>
-            </button> -->
-          
-            <h1>{{ 'HOME.SIGNUP' | translate }}</h1>
+            <i class="bi bi-arrow-left-square" style="color: #282828; font-size:28px; cursor: pointer;"
+            routerLink=""></i>          
+            <h1 style="margin-top: 10px;">{{ 'HOME.SIGNUP' | translate }}</h1>
             <h6>{{ 'HOME.SIGNUPHEAD' | translate }}</h6>
           </span>
           <form [formGroup]="signupForm" (ngSubmit)="signUp()">
