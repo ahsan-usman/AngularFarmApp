@@ -10,10 +10,8 @@ import { FeedDialogComponent } from './feed-dialog/feed-dialog.component';
 import { FeedComponent } from './feed/feed.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
 import { SalesDialogComponent } from './sales-dialog/sales-dialog.component';
 import { SalesHomeComponent } from './sales-home/sales-home.component';
-import { SignupComponent } from './signup/signup.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { VaccineDialogComponent } from './vaccine-dialog/vaccine-dialog.component';
 import { VaccineComponent } from './vaccine/vaccine.component';
@@ -34,10 +32,15 @@ import { MatTableModule } from '@angular/material/table';
 import { NgToastModule } from 'ng-angular-popup';
 import { ActivateGuardGuard } from '../activate-guard.guard';
 import { GuardServiceService } from '../services/guard-service.service';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ExpenseDialogComponent } from './expense-dialog/expense-dialog.component';
-
+import { NgChartsModule } from 'ng2-charts';
+import { MatSelectModule } from '@angular/material/select';
+import { FarmsDataComponent } from './farms-data/farms-data.component';
+import { MatTableExporterModule } from 'mat-table-exporter';
+import { MainAppComponent } from './main-app-header/main-app.component';
+import { FlockDataComponent } from './flock-data/flock-data.component'
 
 export function HttpLoaderFactoryMainApp(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -46,8 +49,6 @@ export function HttpLoaderFactoryMainApp(http: HttpClient) {
 console.log("MAIN Module")
 @NgModule({
   declarations: [
-    LoginComponent,
-    SignupComponent,
     HomeComponent,
     HeaderComponent,
     DialogComponent,
@@ -63,6 +64,9 @@ console.log("MAIN Module")
     UserProfileComponent,
     ExpensesComponent,
     ExpenseDialogComponent,
+    FarmsDataComponent,
+    MainAppComponent,
+    FlockDataComponent
   ],
   imports: [
     CommonModule,
@@ -83,14 +87,17 @@ console.log("MAIN Module")
     MatTableModule,
     MatPaginatorModule,
     NgToastModule,
+    MatTableExporterModule,
     DragDropModule,
+    MatSelectModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactoryMainApp,
         deps: [HttpClient]
-    }
-    })
+      }
+    }),
+    NgChartsModule
   ],
   providers: [ActivateGuardGuard, GuardServiceService],
 })

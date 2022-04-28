@@ -1,7 +1,8 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ApiService } from 'src/app/services/api.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Component, OnInit, Inject } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-expense-dialog',
@@ -10,65 +11,66 @@ import { Component, OnInit, Inject } from '@angular/core';
 })
 export class ExpenseDialogComponent implements OnInit {
 
-  saleForm!: FormGroup;
+  ExpenseForm!: FormGroup;
   actionBtn: string = "Save";
-  constructor(private formbuilder: FormBuilder,
+  constructor(
+    private formbuilder: FormBuilder,
     private apiService: ApiService,
+    private toast: NgToastService,
     @Inject(MAT_DIALOG_DATA) public editData: any,
-    private dialogRef: MatDialogRef<ExpenseDialogComponent>) { }
+    private dialogRef: MatDialogRef<ExpenseDialogComponent>) {
+  }
 
   ngOnInit(): void {
-    this.saleForm = this.formbuilder.group({
-      date: [''],
-      utility: [''],
-      salary: [''],
-      maintenance: [''],
+    this.ExpenseForm = this.formbuilder.group({
+      date: ['', Validators.required],
+      utility: ['', Validators.required],
+      salary: ['', Validators.required],
+      maintenance: ['', Validators.required],
       note: ['']
     });
-
     if (this.editData) {
       this.actionBtn = "Update";
-      this.saleForm.controls['date'].setValue(this.editData.date);
-      this.saleForm.controls['utility'].setValue(this.editData.utility);
-      this.saleForm.controls['salary'].setValue(this.editData.salary);
-      this.saleForm.controls['maintenance'].setValue(this.editData.maintenance);
-      this.saleForm.controls['note'].setValue(this.editData.note);
+      this.ExpenseForm.controls['date'].setValue(this.editData.date);
+      this.ExpenseForm.controls['utility'].setValue(this.editData.utility);
+      this.ExpenseForm.controls['salary'].setValue(this.editData.salary);
+      this.ExpenseForm.controls['maintenance'].setValue(this.editData.maintenance);
+      this.ExpenseForm.controls['note'].setValue(this.editData.note);
     }
   }
 
   AddData() {
     if (!this.editData) {
-      if (this.saleForm.valid) {
-        this.apiService.postExpenseData(this.saleForm.value)
+      if (this.ExpenseForm.valid) {
+        this.apiService.postExpenseData(this.ExpenseForm.value)
           .subscribe({
             next: (res) => {
-              alert("Data added successfully")
-              this.saleForm.reset();
+              this.toast.success({ detail: "Success Message", summary: "Data Added Successfully", duration: 4000 })
+              this.ExpenseForm.reset();
               this.dialogRef.close('save');
             },
             error: () => {
-              alert("Error while Adding Data")
+              this.toast.error({ detail: "Error Message", summary: "Error While Adding Data", duration: 5000 })
             }
           })
       }
     }
-    else{
+    else {
       this.updateData();
     }
   }
 
-
-  updateData(){
-    this.apiService.updateExpenseData(this.saleForm.value, this.editData.id)
-    .subscribe({
-      next:(res)=>{
-        alert("Data Updated Successfully")
-        this.saleForm.reset()
-        this.dialogRef.close('update')
-      },
-      error: () => {
-        alert("Error while updating data")
-      }
-    })
+  updateData() {
+    this.apiService.updateExpenseData(this.ExpenseForm.value, this.editData._id)
+      .subscribe({
+        next: (res) => {
+          this.toast.success({ detail: "Success Message", summary: "Data Updated Successfully", duration: 4000 })
+          this.ExpenseForm.reset()
+          this.dialogRef.close('update')
+        },
+        error: () => {
+          this.toast.error({ detail: "Error Message", summary: "Error While Updating Data", duration: 5000 })
+        }
+      })
   }
 }

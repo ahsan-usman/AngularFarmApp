@@ -1,175 +1,162 @@
 import { ApiService } from './../../services/api.service';
 import { DialogComponent } from './../dialog/dialog.component';
-import { Component, OnInit, ViewChild, ElementRef, DoCheck } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
+import { ActivatedRoute } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, DoCheck {
+export class HomeComponent implements OnInit {
+  
 
-  displayedColumns: any[] = ['date', 'age', 'mortality', 'cumMortality', 'cumMortalityPercent', 'feed', 'usedFeed', 'cumFeed', 'diesel', 'cumDiesel', 'weight', 'note', 'action'];
   dataSource!: MatTableDataSource<any>;
-  totalSum: number = 0;
-  totalFeed: number = 0;
-  usedFeed: number = 0;
-  diesel: number = 0;
-
-  cumMor: any = 0;
-  cumTotal: any;
-  cumResult: any;
-  i: number = 0;
-  dataa: any;
-
-  Feed: any = 0;
-  FeedTotal: any;
-
-  Diesel: any;
-  dieselCum: any;
-
-  Weight: number = 0;
-
-  x: any[] = [];
-  percent: any;
-  cumMortalityPercent: any;
-
-  birdss: any;
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  @ViewChild('birds') birdKey!: ElementRef;
-  SelectBird() {
-    localStorage.setItem("birds", this.birdKey.nativeElement.value)
+  displayedColumns: any[] = ['date', 'age', 'mortality', 'cumMortality', 'cumMortalityPercent', 'feed', 'usedFeed', 'cumFeed', 'diesel', 'cumDiesel', 'weight', 'note', 'action'];
+  totalMortality: number = 0;
+  totalFeed: number = 0;
+  usedFeed: number = 0;
+  diesel: number = 0;
+  cummulativeMortalityResult: number = 0;
+  Feed: number = 0;
+  Weight: number = 0;
+  percent: number = 0;
+  totalBirds: number = 0;
+  cummulativeMortalityTotal: any;
+  FeedTotal: any;
+  Diesel: any;
+  dieselCum: any;
+  data:any;
+  percentage: any[] = [];
+  cumMortalityPercent: any;
+  flockName: string = "";
+  flockId: string = "";
+  farmName:string = "";
+
+  constructor(public dialog: MatDialog,
+    private apiService: ApiService,
+    private activeRoute: ActivatedRoute) {
+    this.activeRoute.queryParams.subscribe(f => { 
+      this.farmName = f['farmName'];
+      this.flockName = f['flockName'];
+      this.getFarmsData()
+    });    
   }
 
-  constructor(public dialog: MatDialog, private api: ApiService) {
-  }
   ngOnInit(): void {
-    // this.cumSum()
-    this.getAllData()
   }
 
-  ngDoCheck() {
-    this.birdss = localStorage.getItem("birds")!;
-  }
   openDialog() {
     this.dialog.open(DialogComponent, {
-      width: '50%',
+      width: '50%',    
     }).afterClosed().subscribe(val => {
       if (val == 'save') {
-        this.getAllData();
+        this.getAllData(this.flockId);
       }
     })
   }
+  
+  getFarmsData() {
+    this.apiService.getFlockData().subscribe(
+      res => {
+        this.data = res;
+        this.select()
+        this.getAllData(this.flockId)
+      }, err => {
+        console.log("error while farm fetching ", err)
+      });
+  }
 
-  getAllData() {
-    this.api.getData()
+  select(){
+    const testing = this.data.filter((x: any) => {
+      if (x.flockName == this.flockName) {
+        return x._id;
+      }
+    });
+    testing.forEach((element: any) => {
+      this.flockId = element._id;
+      this.totalBirds = element.totalBirds;
+    });
+  }
+
+  getAllData(farmID: any) {
+    this.apiService.getData()
       .subscribe({
-        next: (res) => {
-
-          this.dataSource = new MatTableDataSource(res);
-          setTimeout(() => {
-            this.dataSource.sort = this.sort;
-            this.dataSource.paginator = this.paginator;
+        next: (res) => {     
+          const farmData = res.filter((d: { flock_id: any; }) => d.flock_id === this.flockId);
+          this.dataSource = new MatTableDataSource(farmData);
+          //for calculating Mortality Total Sum
+          this.totalMortality = 0;
+          this.dataSource.data.map(d => {
+            this.totalMortality = this.totalMortality + (parseInt(d.mortality));
           });
 
-          //for calculating Sum
-          this.totalSum = 0;
-          console.log(this.dataSource.data.map(d => {
-            this.totalSum += d.mortality;
-          }))
-          console.log("sum of Mortality: ", this.totalSum)
-
-          //for weight total
+          //for Calculating Total Weight
           this.Weight = 0;
           this.dataSource.data.map(w => {
-            this.Weight += w.weight;
-          })
-          console.log("helllloooooo i am weight", this.Weight)
+            this.Weight +=  (parseInt(w.weight));
+          });
 
-          //for total feed
+          //for calculating total feed
           this.totalFeed = 0;
           this.dataSource.data.map(f => {
-            this.totalFeed += f.feed;
-          })
+            this.totalFeed +=  (parseInt(f.feed));
+          });
 
-          //for total used feed
+          //for calculating total used feed
           this.usedFeed = 0;
           this.dataSource.data.map(u => {
-            this.usedFeed += u.usedFeed;
+            this.usedFeed += (parseInt(u.usedFeed));
           })
 
-          //for total diesel calculation
+          //for calculating total diesel 
           this.diesel = 0;
           this.dataSource.data.map(d => {
-            this.diesel += d.diesel
+            this.diesel += (parseInt(d.diesel));
           })
 
-
-          //for cummulative sum 
-          this.cumTotal = [];
-          this.cumResult = 0;
-
+          //for cummulative mortality calculation 
+          this.cummulativeMortalityTotal = [];
           this.dataSource.data.map(m => {
-            this.cumResult += m.mortality;
-            this.cumTotal.push(this.cumResult);
-            m.cumMortality = this.cumTotal
+            this.cummulativeMortalityResult += (parseInt(m.mortality));
+            this.cummulativeMortalityTotal.push(this.cummulativeMortalityResult);
+            m.cumMortality = this.cummulativeMortalityTotal
           });
-          // for(let i = 0; i < m.mortality ; i++ ){
-          //   this.cumResult += m.mortality;
-          //   // this.cumTotal = this.cumTotal + m.mortality;
-          //   this.cumTotal.push(this.cumResult);
 
-          // }
-          // console.log("new cummulative : " + this.cumResult)
-          console.log("Testing for Cummulative " + this.cumTotal)
-
-          //For Cummulative Feed
+          //For Cummulative Feed calculation
           this.FeedTotal = [];
-          this.Feed = 0;
           this.dataSource.data.map(f => {
-            this.Feed += f.usedFeed;
+            this.Feed = this.Feed + (parseInt(f.usedFeed));
             this.FeedTotal.push(this.Feed);
             f.cumFeed = this.FeedTotal
           })
-          console.log("Feed Total: " + this.FeedTotal)
 
-          //For Cummulative Diesel
+          //For Cummulative Diesel calculation
           this.dieselCum = [];
           this.Diesel = 0;
           this.dataSource.data.map(d => {
-            this.Diesel += d.diesel;
+            this.Diesel =this.Diesel + (parseInt(d.diesel));
             this.dieselCum.push(this.Diesel);
             d.cumDiesel = this.dieselCum
           })
-          console.log("Cummulative Diesel: " + this.dieselCum)
 
-          //for cum Percentage of Mortality
+          //for Cummulative Percentage of Mortality
+          for (let index = 0; index < this.cummulativeMortalityTotal.length; index++) {
+            const element = this.cummulativeMortalityTotal[index];
+            this.percent = element * 100 / this.totalBirds;
 
-          // this.cumMortalityPercent = [];
-          this.percent;
-
-          for (let index = 0; index < this.cumTotal.length; index++) {
-            const element = this.cumTotal[index];
-            this.percent = element * 100 / this.birdss;
-
-            this.x.push(this.percent);
+            this.percentage.push(this.percent);
           }
           this.dataSource.data.map(p => {
-            p.cumMortalityPercent = this.x;
-            // this.percent = p.mortality * 100 / this.totalBird ;
+            p.cumMortalityPercent = this.percentage;
           })
-
-          console.log("cum Mortality Percentage : " + this.cumMortalityPercent)
-
-          //end cum mortality 
-
           this.dataSource.sort = this.sort;
         },
         error: (err) => {
@@ -184,24 +171,24 @@ export class HomeComponent implements OnInit, DoCheck {
       data: row
     }).afterClosed().subscribe(val => {
       if (val == 'update') {
-        this.getAllData()
+        this.getAllData(this.flockId)
       }
     })
   }
 
-  deleteData(id: number) {
-    this.api.deleteData(id)
+  deleteData(id: string) {
+    this.apiService.deleteData(id)
       .subscribe({
         next: (res) => {
           alert("Product Deleted Successfully")
-          this.getAllData();
+          this.getAllData(this.flockId);
         },
-        error: () => {
+        error: (err) => {
+          console.log(err)
           alert("Error While Deleting Data")
         }
       })
   }
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -214,62 +201,5 @@ export class HomeComponent implements OnInit, DoCheck {
   print() {
     window.print()
   }
-  openNav() {
-    document.getElementById("mySidenav")!.style.width = "250px";
-    document.getElementById("main")!.style.marginLeft = "250px";
-  }
-
-  closeNav() {
-    document.getElementById("mySidenav")!.style.width = "0";
-    document.getElementById("main")!.style.marginLeft = "0";
-  }
-
-
-  /* For Testing purpose */
-
-  // gett(){
-  //  let muUser: any[]= [{
-  //     name:"ahsan",
-  //     id:10
-  //   },
-  //   {
-  //     name:"ahsan",
-  //     id:12
-  //   },
-  //   {
-  //     name:"ahsan",
-  //     id:17
-  //   },
-  // ]
-  //   // let array=[8,2,3];
-  //   // let answer=array.reduce((acc,val)=>acc+val);
-  //   // console.log(answer)
-
-  //   console.log(muUser.reduce((acc,val) => acc+val.id,0))
-  // }
-
-  // total(data: any){
-  //   if(data){
-  //     this.totalSum += Number(data);
-  //   }
-  //   console.log("asdf", (this.totalSum))
-
-  // }
-
-
-  // cumSum(){
-  //   let num: any= [1,2,3,4,5];
-  //   let total = 0;
-  //   let result = [];
-
-  //   for(let i = 0; i < num.length; i++ ){
-  //     total = total + num[i];
-  //     result.push(total )
-
-  //   }
-
-  //   console.log(" Testing of Cummulative sum:  [1,2,3,4,5] = " + result);
-  // }
-
 }
 

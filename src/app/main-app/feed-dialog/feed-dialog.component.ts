@@ -2,6 +2,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
+import { NgToastService } from 'ng-angular-popup';
 @Component({
   selector: 'app-feed-dialog',
   templateUrl: './feed-dialog.component.html',
@@ -9,24 +10,24 @@ import { Component, Inject, OnInit } from '@angular/core';
 })
 export class FeedDialogComponent implements OnInit {
 
-  feedFormData! : FormGroup;
+  feedFormData!: FormGroup;
   actionBtn: string = "Save";
 
   constructor(
     private formBuilder: FormBuilder,
     private apiService: ApiService,
+    private toast: NgToastService,
     @Inject(MAT_DIALOG_DATA) public editData: any,
     private dialogRef: MatDialogRef<FeedDialogComponent>) { }
 
   ngOnInit(): void {
     this.feedFormData = this.formBuilder.group({
-      date :['', Validators.required],
-      cost :[''] ,
-      totalBags : [''],
+      date: ['', Validators.required],
+      cost: [''],
+      totalBags: [''],
       usedBags: [''],
       note: ['']
     })
-
     if (this.editData) {
       this.actionBtn = "Update";
       this.feedFormData.controls['date'].setValue(this.editData.date);
@@ -35,42 +36,40 @@ export class FeedDialogComponent implements OnInit {
       this.feedFormData.controls['usedBags'].setValue(this.editData.usedBags);
       this.feedFormData.controls['note'].setValue(this.editData.note);
     }
-
   }
-  AddData(){
-    if(!this.editData){
-      if(this.feedFormData.valid){
+
+  AddData() {
+    if (!this.editData) {
+      if (this.feedFormData.valid) {
         this.apiService.postFeedData(this.feedFormData.value)
-        .subscribe({
-          next:(res)=>{
-            alert("Data Added Successfully")
-            this.feedFormData.reset()
-            this.dialogRef.close('save')
-          },
-          error:()=>{
-            alert("Error occured while Adding Data")
-          }
-        })
+          .subscribe({
+            next: (res) => {
+              this.toast.success({ detail: "Success Message", summary: "Data Added Successfully", duration: 4000 })
+              this.feedFormData.reset()
+              this.dialogRef.close('save')
+            },
+            error: () => {
+              this.toast.error({ detail: "Error Message", summary: "Error While Adding Data", duration: 5000 })
+            }
+          })
       }
     }
-    else{
+    else {
       this.updateData();
     }
   }
 
-  updateData(){
-    this.apiService.updateFeedData(this.feedFormData.value,this.editData.id)
-    .subscribe({
-      next:()=>{
-        alert("Data Added Successfully")
-        this.feedFormData.reset()
-        this.dialogRef.close('update')
-      },
-      error:()=>{
-        alert("Error occured while updating data")
-      }
-    })
+  updateData() {
+    this.apiService.updateFeedData(this.feedFormData.value, this.editData._id)
+      .subscribe({
+        next: () => {
+          this.toast.success({ detail: "Success Message", summary: "Data Updated Successfully", duration: 4000 })
+          this.feedFormData.reset()
+          this.dialogRef.close('update')
+        },
+        error: () => {
+          this.toast.error({ detail: "Error Message", summary: "Error While Updating Data", duration: 5000 })
+        }
+      })
   }
-
-
 }

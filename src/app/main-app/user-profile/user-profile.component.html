@@ -1,26 +1,53 @@
 <div id="main">
-<app-header></app-header>
-<div class="container rounded bg-white mt-5 mb-5">
-    <div class="row">
-        <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">{{userName}}</span><span class="text-black-50">{{userEmail}}</span><span> </span></div>
-        </div>
-        <div class="col-md-7 border-right">
-            <form [formGroup]="updateData">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Edit User Data</h4>
-                </div>
-                    <div class="col-md-12"><label class="labels">Full Name</label><input type="text" class="form-control" placeholder="Enter Full Name" value="" formControlName="fullname"></div>
-                    <div class="col-md-12"><label class="labels">Contact</label><input type="text" class="form-control" placeholder="Enter Contact Number" value="" formControlName="contact"></div>
-                    <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="Enter User Email" value="" formControlName="email"></div>
-                    <div class="col-md-12"><label class="labels">Password</label><input type="text" class="form-control" placeholder="Enter User Password" value="" formControlName="password"></div>
-                   
-                </div> 
-                <div class="mt-2 text-center">
-                    <p>You will be logged out after Editing Data</p>
-                    <button class="btn profile-button" style="background-color: #d8944e; color: white;" type="button" (click)="update()">Update User Data</button></div>
-            </form>
+    <div class="container rounded bg-white mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
+                        width="150px"
+                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
+                        class="font-weight-bold">{{userName}}</span><span
+                        class="text-black-50">{{userEmail}}</span><span> </span></div>
+            </div>
+            <div class="col-md-7 border-right">
+                <form [formGroup]="updateData">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Edit User Data</h4>
+                        </div>
+                        <div class="col-md-12"><label class="labels">Full Name</label><input type="text"
+                                class="form-control" placeholder="Enter Full Name" value="" formControlName="fullname">
+                            <small class="text-danger"
+                                *ngIf="updateData.get('fullname')?.invalid && updateData.get('fullname')?.touched"> *
+                                Name is Required </small>
+                        </div>
+                        <div class="col-md-12"><label class="labels">Contact</label><input type="text"
+                                class="form-control" placeholder="Enter Contact Number" value=""
+                                formControlName="contact">
+                            <small class="text-danger"
+                                *ngIf="updateData.get('contact')?.invalid && updateData.get('contact')?.touched"> *
+                                Contact is Required </small>
+                        </div>
+                        <div class="col-md-12"><label class="labels">Email</label><input type="text"
+                                class="form-control" placeholder="Enter User Email" value="" formControlName="email">
+                            <small class="text-danger"
+                                *ngIf="updateData.get('email')?.invalid && updateData.get('email')?.touched"> *
+                                Email Address is Required </small>
+                        </div>
+                        <div class="col-md-12"><label class="labels">Password</label><input type="text"
+                                class="form-control" placeholder="Enter User Password" value=""
+                                formControlName="password">
+                            <small class="text-danger"
+                                *ngIf="updateData.get('password')?.invalid && updateData.get('password')?.touched"> *
+                                Password is Required </small>
+                        </div>
+
+                    </div>
+                    <div class="mt-2 text-center">
+                        <p>You will be logged out after Editing Data</p>
+                        <button class="btn profile-button" style="background-color: #d8944e; color: white;"
+                            type="button" (click)="update()">Update User Data</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

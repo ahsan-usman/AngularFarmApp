@@ -28,18 +28,19 @@
         <span class="vl"></span>
         <span class="notimp">
             <i class="bi bi-person"></i>
-            <span class="TopBarContentText" routerLink="/mainapp/login"
+            <span class="TopBarContentText" routerLink=""
                 style="cursor: pointer;">{{'HOME.LOGIN'|translate}}</span>
         </span>
         <span class="vl"></span>
         <span class="notimp">
             <i class="bi bi-pencil"></i>
-            <span class="TopBarContentText" routerLink="/mainapp/signup"
+            <span class="TopBarContentText" routerLink="/homeapp/signup"
                 style="cursor: pointer;">{{'HOME.SIGNUP'|translate}}</span>
         </span>
     </span>
 </div>
-<router-outlet></router-outlet>
 
+<ngx-ui-loader></ngx-ui-loader>
+<router-outlet></router-outlet>
 <lib-ng-toast></lib-ng-toast>
 <app-footer></app-footer>

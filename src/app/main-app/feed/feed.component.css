@@ -113,6 +113,12 @@ table {
   user-select: none;
   flex-shrink: 0;
 }
+h1{
+  font-family: 'Raleway';
+  font-weight:500;
+  font-size: 22px;
+  color: #D8944E;
+}
 
 
 

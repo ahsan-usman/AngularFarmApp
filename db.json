@@ -1,6 +1,7 @@
 {
   "FarmData": [
     {
+      "farmid": 2,
       "date": "2022-01-30T19:00:00.000Z",
       "age": "0",
       "mortality": 0,
@@ -12,6 +13,7 @@
       "id": 1
     },
     {
+      "farmid": 1,
       "date": "2022-01-31T19:00:00.000Z",
       "age": "1",
       "mortality": 64,
@@ -23,6 +25,7 @@
       "id": 2
     },
     {
+      "farmid": 2,
       "date": "2022-02-01T19:00:00.000Z",
       "age": "2",
       "mortality": 32,
@@ -34,6 +37,7 @@
       "id": 3
     },
     {
+      "farmid": 1,
       "date": "2022-02-02T19:00:00.000Z",
       "age": "3",
       "mortality": 30,
@@ -45,6 +49,7 @@
       "id": 4
     },
     {
+      "farmid": 2,
       "date": "2022-02-03T19:00:00.000Z",
       "age": "4",
       "mortality": 32,
@@ -56,6 +61,7 @@
       "id": 5
     },
     {
+      "farmid": 1,
       "date": "2022-02-04T19:00:00.000Z",
       "age": "5",
       "mortality": 38,
@@ -67,17 +73,19 @@
       "id": 6
     },
     {
+      "farmid": 2,
       "date": "2022-02-05T19:00:00.000Z",
-      "age": "6",
-      "mortality": 24,
-      "feed": 0,
-      "usedFeed": 9,
-      "diesel": 60,
-      "weight": 0,
+      "age": "7",
+      "mortality": 25,
+      "feed": 25,
+      "usedFeed": 10,
+      "diesel": 70,
+      "weight": 5,
       "note": "",
       "id": 7
     },
     {
+      "farmid": 1,
       "date": "2022-02-06T19:00:00.000Z",
       "age": "7",
       "mortality": 43,
@@ -87,6 +95,42 @@
       "weight": 180,
       "note": "",
       "id": 8
+    },
+    {
+      "farmid": 2,
+      "date": "2022-02-06T19:00:00.000Z",
+      "age": "8",
+      "mortality": 10,
+      "feed": 15,
+      "usedFeed": 20,
+      "diesel": 25,
+      "weight": 30,
+      "note": "",
+      "id": 9
+    },
+    {
+      "farmid": 2,
+      "date": "2022-04-10T19:00:00.000Z",
+      "age": "15",
+      "mortality": 40,
+      "feed": 85,
+      "usedFeed": 30,
+      "diesel": 35,
+      "weight": 28,
+      "note": "none",
+      "id": 10
+    },
+    {
+      "farmid": 1,
+      "date": "2022-04-07T19:00:00.000Z",
+      "age": "10",
+      "mortality": 15,
+      "feed": 10,
+      "usedFeed": 5,
+      "diesel": 10,
+      "weight": 5,
+      "note": "none",
+      "id": 11
     }
   ],
   "signupUsers": [
@@ -124,57 +168,367 @@
       "email": "usmankhan0@gmail.com",
       "password": "123",
       "id": 5
+    },
+    {
+      "fullname": "Ahsan Usman",
+      "contact": "03105054604",
+      "email": "ahsanusman99@gmail.com",
+      "password": "ahsan123",
+      "id": 6
+    },
+    {
+      "fullname": "Saqib Turk",
+      "contact": 314771717,
+      "email": "saqibturk069@gmail.com",
+      "password": "saqib123",
+      "id": 7
     }
   ],
   "salesData": [
     {
-      "date": "2022-03-01T19:00:00.000Z",
-      "age": "38",
-      "truckNumber": "LEB-8888",
-      "weight": 15000,
-      "sold": 3000,
-      "note": "No Comment",
+      "farmid": 1,
+      "date": "2022-04-01T19:00:00.000Z",
+      "truckNumber": "CAF-1493",
+      "driver": "Ahmed",
+      "emptyWeight": 2282,
+      "loadedWeight": 4210,
+      "rate": 224,
+      "birds": 840,
+      "gatePass": 130,
+      "note": "None",
       "id": 1
     },
     {
-      "date": "2022-03-02T19:00:00.000Z",
-      "age": "39",
-      "truckNumber": "LEA-4544",
-      "weight": 4500,
-      "sold": 8000,
-      "note": "Noted",
+      "farmid": 1,
+      "date": "2022-04-01T19:00:00.000Z",
+      "truckNumber": "7071",
+      "driver": "husnain",
+      "emptyWeight": 2246,
+      "loadedWeight": 4068,
+      "rate": 224,
+      "birds": 800,
+      "gatePass": 131,
+      "note": "None",
       "id": 2
     },
     {
-      "date": "2022-03-03T19:00:00.000Z",
-      "age": "39",
-      "truckNumber": "LEA-7752",
-      "weight": 3500,
-      "sold": 850,
-      "note": "yes",
+      "farmid": 1,
+      "date": "2022-04-01T19:00:00.000Z",
+      "truckNumber": "CA-2790",
+      "driver": "nazir",
+      "emptyWeight": 2222,
+      "loadedWeight": 4138,
+      "rate": 224,
+      "birds": 800,
+      "gatePass": 132,
+      "note": "Nil",
       "id": 3
+    },
+    {
+      "farmid": 1,
+      "date": "2022-04-01T19:00:00.000Z",
+      "truckNumber": "CA-1750",
+      "driver": "Mumtaz",
+      "emptyWeight": 2230,
+      "loadedWeight": 4122,
+      "rate": 224,
+      "birds": 800,
+      "gatePass": 133,
+      "note": "No",
+      "id": 4
+    },
+    {
+      "farmid": 1,
+      "date": "2022-04-01T19:00:00.000Z",
+      "truckNumber": "APF-2022",
+      "driver": "Mubashir",
+      "emptyWeight": 2140,
+      "loadedWeight": 4012,
+      "rate": 224,
+      "birds": 1660,
+      "gatePass": 134,
+      "note": "None",
+      "id": 5
+    },
+    {
+      "farmid": 1,
+      "date": "2022-04-01T19:00:00.000Z",
+      "truckNumber": "9671",
+      "driver": "hashim",
+      "emptyWeight": 4516,
+      "loadedWeight": 8336,
+      "rate": 224,
+      "birds": 680,
+      "gatePass": 135,
+      "note": "nil",
+      "id": 6
+    },
+    {
+      "farmid": 1,
+      "date": "2022-04-01T19:00:00.000Z",
+      "truckNumber": "8634",
+      "driver": "tahir",
+      "emptyWeight": 2282,
+      "loadedWeight": 3798,
+      "rate": 224,
+      "birds": 680,
+      "gatePass": 136,
+      "note": "nil",
+      "id": 7
+    },
+    {
+      "farmid": 1,
+      "date": "2022-04-01T19:00:00.000Z",
+      "truckNumber": "1629",
+      "driver": "irfan",
+      "emptyWeight": 2130,
+      "loadedWeight": 3640,
+      "rate": 224,
+      "birds": 680,
+      "gatePass": 137,
+      "note": "nil",
+      "id": 8
+    },
+    {
+      "farmid": 1,
+      "date": "2022-04-01T19:00:00.000Z",
+      "truckNumber": "7658",
+      "driver": "sajid",
+      "emptyWeight": 2470,
+      "loadedWeight": 3308,
+      "rate": 224,
+      "birds": 380,
+      "gatePass": 138,
+      "note": "nil",
+      "id": 9
+    },
+    {
+      "farmid": 1,
+      "date": "2022-04-01T19:00:00.000Z",
+      "truckNumber": "6287",
+      "driver": "waheed",
+      "emptyWeight": 2172,
+      "loadedWeight": 4028,
+      "rate": 224,
+      "birds": 820,
+      "gatePass": 139,
+      "note": "nil",
+      "id": 10
+    },
+    {
+      "farmid": 1,
+      "date": "2022-04-01T19:00:00.000Z",
+      "truckNumber": "1873",
+      "driver": "bilal",
+      "emptyWeight": 1154,
+      "loadedWeight": 1916,
+      "rate": 224,
+      "birds": 350,
+      "gatePass": 140,
+      "note": "none",
+      "id": 11
+    },
+    {
+      "farmid": 1,
+      "date": "2022-04-01T19:00:00.000Z",
+      "truckNumber": "8308",
+      "driver": "fida hussain",
+      "emptyWeight": 2110,
+      "loadedWeight": 2742,
+      "rate": 224,
+      "birds": 300,
+      "gatePass": 141,
+      "note": "nil",
+      "id": 12
+    },
+    {
+      "farmid": 1,
+      "date": "2022-04-01T19:00:00.000Z",
+      "truckNumber": "9437",
+      "driver": "husnain",
+      "emptyWeight": 1868,
+      "loadedWeight": 2708,
+      "rate": 224,
+      "birds": 380,
+      "gatePass": 142,
+      "note": "nil",
+      "id": 13
+    },
+    {
+      "farmid": 1,
+      "date": "2022-04-01T19:00:00.000Z",
+      "truckNumber": "5177",
+      "driver": "rizwan jutt",
+      "emptyWeight": 2184,
+      "loadedWeight": 4196,
+      "rate": 224,
+      "birds": 870,
+      "gatePass": 128,
+      "note": "None",
+      "id": 14
+    },
+    {
+      "farmid": 1,
+      "date": "2022-04-01T19:00:00.000Z",
+      "truckNumber": "4769",
+      "driver": "mir manzoor",
+      "emptyWeight": 4102,
+      "loadedWeight": 7462,
+      "rate": 224,
+      "birds": 1050,
+      "gatePass": 129,
+      "note": "nil",
+      "id": 15
+    },
+    {
+      "farmid": 2,
+      "date": "2022-03-31T19:00:00.000Z",
+      "truckNumber": "CAF-2021",
+      "driver": "Arshad",
+      "emptyWeight": 550,
+      "loadedWeight": 1050,
+      "rate": 224,
+      "birds": 100,
+      "gatePass": 121,
+      "note": "none",
+      "id": 16
+    },
+    {
+      "farmid": 2,
+      "date": "2022-04-06T19:00:00.000Z",
+      "truckNumber": "LEA-7754",
+      "driver": "Amjad khan",
+      "emptyWeight": 5505,
+      "loadedWeight": 8808,
+      "rate": 226,
+      "birds": 250,
+      "gatePass": 121,
+      "note": "nil",
+      "id": 17
     }
   ],
   "expenseData": [
     {
-      "date": "2022-03-07T19:00:00.000Z",
-      "utility": 15000,
-      "salary": 16000,
-      "maintenance": 5222,
+      "farmid": 1,
+      "date": "2022-02-28T19:00:00.000Z",
+      "utility": 1500,
+      "salary": 1500,
+      "maintenance": 1500,
       "note": "no",
-      "id": 1
+      "id": 4
     },
     {
-      "date": "2022-03-18T19:00:00.000Z",
-      "utility": 5800,
-      "salary": 6800,
-      "maintenance": 4558,
-      "note": "no",
-      "id": 2
+      "farmid": 1,
+      "date": "2022-03-01T19:00:00.000Z",
+      "utility": 3000,
+      "salary": 1000,
+      "maintenance": 1000,
+      "note": "No",
+      "id": 5
+    },
+    {
+      "farmid": 2,
+      "date": "2022-02-28T19:00:00.000Z",
+      "utility": 1500,
+      "salary": 1500,
+      "maintenance": 1500,
+      "note": "No",
+      "id": 6
+    },
+    {
+      "farmid": 2,
+      "date": "2022-03-02T19:00:00.000Z",
+      "utility": 1800,
+      "salary": 1800,
+      "maintenance": 1800,
+      "note": "No",
+      "id": 7
+    },
+    {
+      "farmid": 2,
+      "date": "2022-03-03T19:00:00.000Z",
+      "utility": 1600,
+      "salary": 1600,
+      "maintenance": 1600,
+      "note": "None",
+      "id": 8
+    },
+    {
+      "farmid": 1,
+      "date": "2022-03-02T19:00:00.000Z",
+      "utility": 1700,
+      "salary": 1700,
+      "maintenance": 1700,
+      "note": "No",
+      "id": 9
+    },
+    {
+      "farmid": 2,
+      "date": "2022-03-04T19:00:00.000Z",
+      "utility": 1700,
+      "salary": 1800,
+      "maintenance": 1900,
+      "note": "NONE",
+      "id": 11
+    },
+    {
+      "farmid": 2,
+      "date": "2022-03-02T19:00:00.000Z",
+      "utility": 1675,
+      "salary": 1675,
+      "maintenance": 1675,
+      "note": "No",
+      "id": 12
+    },
+    {
+      "farmid": 1,
+      "date": "2022-03-02T19:00:00.000Z",
+      "utility": 1670,
+      "salary": 1670,
+      "maintenance": 1670,
+      "note": "bil",
+      "id": 13
+    },
+    {
+      "farmid": 2,
+      "date": "2022-02-28T19:00:00.000Z",
+      "utility": 12700,
+      "salary": 13700,
+      "maintenance": 17300,
+      "note": "Nopes",
+      "id": 14
+    },
+    {
+      "farmid": 2,
+      "date": "2022-03-16T19:00:00.000Z",
+      "utility": 1900,
+      "salary": 19200,
+      "maintenance": 1922,
+      "note": "NIL",
+      "id": 15
+    },
+    {
+      "farmid": 1,
+      "date": "2022-04-06T19:00:00.000Z",
+      "utility": 17500,
+      "salary": 16500,
+      "maintenance": 16900,
+      "note": "None",
+      "id": 16
+    },
+    {
+      "farmid": 2,
+      "date": "2022-04-13T19:00:00.000Z",
+      "utility": 550,
+      "salary": 650,
+      "maintenance": 2000,
+      "note": "none",
+      "id": 17
     }
   ],
   "feedData": [
     {
+      "farmid": 1,
       "date": "2022-02-28T19:00:00.000Z",
       "cost": 1500,
       "totalBags": 150,
@@ -183,16 +537,36 @@
       "id": 1
     },
     {
+      "farmid": 2,
       "date": "2022-03-01T19:00:00.000Z",
       "cost": 1500,
       "totalBags": 200,
       "usedBags": 100,
       "note": "None",
       "id": 2
+    },
+    {
+      "farmid": 2,
+      "date": "2022-03-31T19:00:00.000Z",
+      "cost": 1550,
+      "totalBags": 250,
+      "usedBags": 60,
+      "note": "nil",
+      "id": 3
+    },
+    {
+      "farmid": 1,
+      "date": "2022-04-07T19:00:00.000Z",
+      "cost": 170,
+      "totalBags": 175,
+      "usedBags": 30,
+      "note": "NONE",
+      "id": 4
     }
   ],
   "vaccine": [
     {
+      "farmid": 1,
       "date": "2022-02-28T19:00:00.000Z",
       "medicine": "Sinopharm",
       "price": 18000,
@@ -202,6 +576,7 @@
       "id": 1
     },
     {
+      "farmid": 2,
       "date": "2022-03-01T19:00:00.000Z",
       "medicine": "Pfizer",
       "price": 15550,
@@ -209,6 +584,38 @@
       "vaccinated": 100,
       "note": "No",
       "id": 2
+    },
+    {
+      "farmid": 2,
+      "date": "2022-03-31T19:00:00.000Z",
+      "medicine": "Panadol",
+      "price": 26,
+      "quantity": 16,
+      "vaccinated": 55,
+      "note": "none",
+      "id": 3
+    },
+    {
+      "farmid": 1,
+      "date": "2022-04-06T19:00:00.000Z",
+      "medicine": "panstan",
+      "price": 50,
+      "quantity": 30,
+      "vaccinated": 50,
+      "note": "nil",
+      "id": 4
+    }
+  ],
+  "farms": [
+    {
+      "farmName": "farm1",
+      "farmid": 1,
+      "totalBirds": 30000
+    },
+    {
+      "farmName": "farm2",
+      "farmid": 2,
+      "totalBirds": 18000
     }
   ],
   "profile": {

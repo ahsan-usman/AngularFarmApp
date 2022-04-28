@@ -1,7 +1,8 @@
+import { LoginComponent } from './main-home/login/login.component';
 import { CustomErrorComponent } from './main-app/custom-error/custom-error.component';
-import { HomePageComponent } from './main-home/home-page/home-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CustomPreLoadingService } from './services/custom-pre-loading.service';
 
 const routes: Routes = [
   {
@@ -10,13 +11,16 @@ const routes: Routes = [
   },
   {
     path: 'mainapp',
+    data: { preload: true, loadAfterSeconds: 1 },
     loadChildren: () => import('./main-app/main-app.module').then(m => m.MainAppModule)
   },
-  { path:'', component: HomePageComponent, pathMatch:'full' },
-  { path:'**', component:CustomErrorComponent}
+  { path: '', component: LoginComponent, pathMatch: 'full' },
+  { path: '**', component: CustomErrorComponent }
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,
+    { preloadingStrategy: CustomPreLoadingService,
+     })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

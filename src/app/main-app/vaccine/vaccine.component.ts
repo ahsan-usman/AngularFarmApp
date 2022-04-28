@@ -1,10 +1,12 @@
 import { ApiService } from 'src/app/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { VaccineDialogComponent } from '../vaccine-dialog/vaccine-dialog.component';
+import { ActivatedRoute } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-vaccine',
@@ -12,61 +14,78 @@ import { VaccineDialogComponent } from '../vaccine-dialog/vaccine-dialog.compone
   styleUrls: ['./vaccine.component.css']
 })
 export class VaccineComponent implements OnInit {
-  Totalbirds: any = "";
 
-  displayedColumns: any[] = ['date', 'medicine', 'price', 'quantity', 'vaccinated','note', 'action'];
-  totalVaccinatedBirds: number = 0;
-  remaining: number =0;
-
-  @ViewChild('birds') birdKey!: ElementRef;
-  SelectBird() {
-    localStorage.setItem("birds", this.birdKey.nativeElement.value)
-  }
-  constructor(private dialog: MatDialog, private apiService:ApiService) { }
   dataSource!: MatTableDataSource<any>;
+  flockName: string = "";
+  farmName: string = "";
+  Totalbirds: number = 0;
+  totalVaccinatedBirds: number = 0;
+  remaining: number = 0;
+  flockId: number = 0;
+  displayedColumns: any[] = ['date', 'medicine', 'price', 'quantity', 'vaccinated', 'note', 'action'];
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  constructor(private dialog: MatDialog,
+    private apiService: ApiService,
+    private toast: NgToastService,
+    private activeRoute: ActivatedRoute) {
+    this.dataSource = new MatTableDataSource();
+    this.activeRoute.queryParams.subscribe(f => {
+      this.farmName = f['farmName'];
+      this.flockName = f['flockName'];
+      this.getFarmsData()
+    });
+  }
+
   ngOnInit(): void {
-    this.getAllData()
-  }
-  ngDoCheck() {
-    this.Totalbirds = localStorage.getItem("birds")!;
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
-  getAllData(){
+  getFarmsData() {
+    this.apiService.getFlockData().subscribe(
+      res => {
+        const data = res.filter((x: any) => x.flockName == this.flockName);
+        data.forEach((element: any) => {
+          this.flockId = element._id;
+          this.Totalbirds = element.totalBirds;
+        });
+        this.getAllData(this.flockId)
+      }, err => {
+        console.log("error while farm fetching ", err)
+      });
+  }
+
+  getAllData(flockId: any) {
     this.apiService.getVaccineData()
-    .subscribe({
-      next:(res)=>{
-        this.dataSource = new MatTableDataSource(res);
-          setTimeout(() => {
-            this.dataSource.sort = this.sort;
-            this.dataSource.paginator = this.paginator;
-          });
-
+      .subscribe({
+        next: (res) => {
           this.totalVaccinatedBirds = 0;
-          this.dataSource.data.map(m=>{
+          const flockData = res.filter((d: { flock_id: any; }) => d.flock_id === flockId)
+          this.dataSource = new MatTableDataSource(flockData);
+          this.dataSource.data.map(m => {
             this.totalVaccinatedBirds += m.vaccinated;
           })
-
           this.remaining = 0;
-          this.dataSource.data.map(r=>{
-            this.remaining = this.Totalbirds - this.totalVaccinatedBirds; 
+          this.dataSource.data.map(r => {
+            this.remaining = this.Totalbirds - this.totalVaccinatedBirds;
           })
-          console.log("boom boooo", this.remaining)
-
-      },error:()=>{
-        alert("Error occured while fetching records")
-      }
-    })
+          this.dataSource.sort = this.sort;
+        }, error: () => {
+          this.toast.error({ detail: "Error Message", summary: "Error Occured While Fetching  Data", duration: 5000 })
+        }
+      })
   }
-  editData(row:any){
-    this.dialog.open(VaccineDialogComponent,{
+
+  editData(row: any) {
+    this.dialog.open(VaccineDialogComponent, {
       width: '50%',
       data: row
-    }).afterClosed().subscribe(val=>{
-      if(val == 'update'){
-        this.getAllData()
+    }).afterClosed().subscribe(val => {
+      if (val == 'update') {
+        this.getAllData(this.flockId)
       }
     })
   }
@@ -75,22 +94,22 @@ export class VaccineComponent implements OnInit {
       width: '50%'
     }).afterClosed().subscribe(val => {
       if (val == 'save') {
-        this.getAllData();
+        this.getAllData(this.flockId);
       }
     })
   }
 
-  deleteData(id:number){
+  deleteData(id: string) {
     this.apiService.deleteVaccineData(id)
-    .subscribe({
-      next:(res)=>{
-        alert("Data Deleted Successfully")
-        this.getAllData()
-      },
-      error:()=>{
-        alert("Error while fetching Data")
-      }
-    })
+      .subscribe({
+        next: (res) => {
+          this.toast.success({ detail: "Success Message", summary: "Data Deleted Successfully", duration: 4000 })
+          this.getAllData(this.flockId)
+        },
+        error: () => {
+          this.toast.error({ detail: "Error Message", summary: "Error While Deleting Data", duration: 5000 })
+        }
+      })
   }
   print() {
     window.print()
@@ -103,5 +122,4 @@ export class VaccineComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
 }

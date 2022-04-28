@@ -42,3 +42,12 @@
   </div>
 </body>
 
+
+<div id="map">
+  <google-map height="450px" width="100%" [zoom]="zoom" [center]="center" [options]="options">
+      <map-marker *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
+          [title]="marker.title" [options]="marker.options">
+      </map-marker>
+  </google-map>
+</div>
+

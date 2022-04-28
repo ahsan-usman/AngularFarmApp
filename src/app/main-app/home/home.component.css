@@ -1,36 +1,30 @@
 table {
-    width: 100%;
-  }
-  
-  .mat-form-field {
-    font-size: 15px;
-    width: 100%;
-    
-  }
-  
- .container{
-    margin: 0 auto;
- }
-
- .form{
-  font-size: 13px
-  
- }
-
- a{
-   display: block;
-   width: 300px;
-   font-size: 20px;
- }
- .data{
-   float: right;
-   padding-right:13%
- }
-
- div{
+  width: 100%;
+}  
+.mat-form-field {
+  font-size: 15px;
+  width: 100%;
+} 
+.container{
+  margin: 0 auto;
+}
+.form{
+  font-size: 13px;
+  text-align: center;
+}
+a{
+  display: block;
+  width: 300px;
+  font-size: 20px;
+}
+.data{
+  float: right;
+  padding-right:13%;
+}
+div{
   font-family: 'Assistant', sans-serif;
- }
- 
+}
+
 @media print{
   button{
     display: none;
@@ -113,6 +107,10 @@ table {
   user-select: none;
   flex-shrink: 0;
 }
-
-
+h1{
+  font-family: 'Raleway';
+  font-weight:500;
+  font-size: 22px;
+  color: #D8944E;
+}
 

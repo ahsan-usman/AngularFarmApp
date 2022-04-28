@@ -87,3 +87,10 @@ a:hover {
     border-right: 1px solid grey;
     height: 100%;
 }
+
+@media print{
+   footer{
+       display: none;
+   } 
+}
+  

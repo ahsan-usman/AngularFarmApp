@@ -1,11 +1,12 @@
 table {
-    width: 100%;
+  width:100%;
+  text-align: left;
+  padding: 70px;
   }
   
   .mat-form-field {
     font-size: 15px;
     width: 100%;
-    
   }
   
  .container{
@@ -17,6 +18,11 @@ table {
   
  }
 
+ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  padding-right: 10px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+ }
  a{
    display: block;
    width: 300px;
@@ -42,10 +48,16 @@ table {
     display: none;
   }
   .c-dashboardInfo{
+    padding: 0px;
+    margin: 0px;
+  }
+  p{
     display: none;
   }
- 
-
+  #root{
+    padding: 0px;
+    margin: 0px;
+  }
 }
 
 .c-dashboardInfo {
@@ -112,5 +124,10 @@ table {
   flex-shrink: 0;
 }
 
-
+h1{
+  font-family: 'Raleway';
+  font-weight:500;
+  font-size: 22px;
+  color: #D8944E;
+}
 

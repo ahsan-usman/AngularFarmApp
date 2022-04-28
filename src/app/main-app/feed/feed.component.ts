@@ -1,95 +1,132 @@
 import { ApiService } from 'src/app/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FeedDialogComponent } from './../feed-dialog/feed-dialog.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild, DoCheck, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
-export class FeedComponent implements OnInit {
+export class FeedComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: any[] = ['date', 'cost', 'totalBags', 'usedBags','cumUsedBags','note', 'action'];
+  displayedColumns: any[] = ['date', 'cost', 'totalBags', 'usedBags', 'cumUsedBags', 'note', 'action'];
+  farmName: string = "";
+  flockName: string = "";
   totalBag: number = 0;
-  usedBag:number = 0;
-  cummTotal:any;
-  cummResult:any;
+  usedBag: number = 0;
+  flockId: number = 0;
+  cummulativeTotal: any;
+  cummulativeResult : number = 0;
+  data: any;
 
-  constructor(private dialog: MatDialog, private apiService:ApiService) { }
+
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  ngOnInit(): void {
-    this.getAllData()
+  constructor(private dialog: MatDialog,
+    private apiService: ApiService,
+    private toast: NgToastService,
+    private activeRoute: ActivatedRoute
+    ) {
+    this.dataSource = new MatTableDataSource();
+    this.activeRoute.queryParams.subscribe(f => {
+      this.farmName = f['farmName'];
+      this.flockName = f['flockName'];
+      this.getFarmsData()
+    });
+
+  }
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
+  ngOnInit(): void {
+    this.getAllData(this.flockId)
+  }
   openDialog() {
     this.dialog.open(FeedDialogComponent, {
       width: '50%',
     }).afterClosed().subscribe(val => {
       if (val == 'save') {
-        this.getAllData();
+        this.getAllData(this.flockId);
       }
     })
   }
 
-  getAllData(){
+  getFarmsData() {
+    this.apiService.getFlockData().subscribe(
+      res => {
+        this.data = res;
+        const testing = this.data.filter((x: any) => x.flockName == this.flockName);
+        testing.forEach((element: any) => {
+          this.flockId = element._id;
+        });
+        this.getAllData(this.flockId)
+      }, err => {
+        console.log("error while farm fetching ", err)
+      });
+  }
+
+  getAllData(flockId: any) {
     this.apiService.getFeedData()
-    .subscribe({
-      next:(res)=>{
-        this.dataSource = new MatTableDataSource(res);
-          setTimeout(() => {
-            this.dataSource.sort = this.sort;
-            this.dataSource.paginator = this.paginator;
-          });
-          
+      .subscribe({
+        next: (res) => {
+          const farmData = res.filter((d: { flock_id: any; }) => d.flock_id === flockId)
+          this.dataSource = new MatTableDataSource(farmData);
+
           this.totalBag = 0;
           this.dataSource.data.map(t => {
             this.totalBag += t.totalBags
           });
 
           this.usedBag = 0;
-          this.dataSource.data.map(u=>{
+          this.dataSource.data.map(u => {
             this.usedBag += u.usedBags;
           })
 
-          this.cummTotal = [];
-          this.cummResult = 0;
-          this.dataSource.data.map(c=>{
-            this.cummResult += c.usedBags;
-            this.cummTotal.push(this.cummResult)
-            c.cumUsedBags = this.cummTotal;
+          this.cummulativeTotal = [];
+          this.dataSource.data.map(c => {
+            this.cummulativeResult += c.usedBags;
+            this.cummulativeTotal.push(this.cummulativeResult)
+            c.cumUsedBags = this.cummulativeTotal;
           })
-      },error:()=>{alert("Error occured while fetching record")}
-    })
+          this.dataSource.sort = this.sort;
+        }, error: () => {
+          this.toast.error({ detail: "Error Message", summary: "Error While Adding Data", duration: 5000 })
+        }
+      })
   }
 
-  editData(row:any){
-    this.dialog.open(FeedDialogComponent,{
-      width:'50%',
+  editData(row: any) {
+    this.dialog.open(FeedDialogComponent, {
+      width: '50%',
       data: row
-    }).afterClosed().subscribe(val=>{
-      if(val == 'update'){
-        this.getAllData()
+    }).afterClosed().subscribe(val => {
+      if (val == 'update') {
+        this.getAllData(this.flockId)
       }
     })
   }
 
-  deleteData(id:number){
+  deleteData(id: string) {
     this.apiService.deleteFeedData(id)
-    .subscribe({
-      next:(res)=>{
-        alert("Data deleted Successfully")
-      },
-      error:()=>{
-        alert("Error while deleting record")
-      }
-    })
+      .subscribe({
+        next: (res) => {
+          this.toast.success({ detail: "Success Message", summary: "Data Deleted Successfully", duration: 4000 })
+          this.getAllData(this.flockId);
+        },
+        error: () => {
+          this.toast.error({ detail: "Error Message", summary: "Error While Deleting Data", duration: 5000 })
+        }
+      })
   }
   print() {
     window.print()
@@ -102,7 +139,4 @@ export class FeedComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
-
-
 }

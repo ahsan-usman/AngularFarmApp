@@ -1,5 +1,4 @@
-import { MainAppModule } from './main-app/main-app.module';
-import { MainHomeModule } from './main-home/main-home.module';
+import { InterceptorInterceptor } from './services/interceptor.interceptor';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { GoogleMapsModule } from '@angular/google-maps';
@@ -7,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientJsonpModule, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -23,16 +22,39 @@ import { ActivateGuardGuard } from './activate-guard.guard';
 import { GuardServiceService } from './services/guard-service.service';
 import { NgToastModule } from 'ng-angular-popup';
 import { CommonModule } from '@angular/common';
-
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FooterComponent } from './component/footer/footer.component';
+import { NgxUiLoaderConfig, NgxUiLoaderModule, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
+import { NgChartsModule } from 'ng2-charts';
+import { MatTableExporterModule } from 'mat-table-exporter';
+
+
 
 console.log("app module")
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  "blur": 5,
+  "delay": 0,
+  "fastFadeOut": true,
+  "fgsColor": "white",
+  "fgsPosition": "center-center",
+  "fgsSize": 80,
+  "fgsType": "rectangle-bounce-pulse-out-rapid",
+  "masterLoaderId": "master",
+  "overlayColor": "rgba(40, 40, 40, 0.8)",
+  "pbColor": "white",
+  "pbDirection": "ltr",
+  "pbThickness": 4,
+  "hasProgressBar": true,
+  "text": "Loading....",
+  "textColor": "#FFFFFF",
+  "textPosition": "center-center",
+}
+
 
 @NgModule({
   declarations: [
@@ -55,25 +77,29 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatInputModule,
     MatIconModule,
     MatDatepickerModule,
+    MatTableExporterModule,
     MatNativeDateModule,
     MatSortModule,
     MatTableModule,
     MatPaginatorModule,
     NgToastModule,
     DragDropModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    NgxUiLoaderHttpModule.forRoot({ showForeground: true }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
-    }
-    })
+      }
+    }),
+    NgChartsModule,
   ],
   exports: [
     TranslateModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [ActivateGuardGuard, GuardServiceService],
+  providers: [ActivateGuardGuard, GuardServiceService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

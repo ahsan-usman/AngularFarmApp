@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgToastService } from 'ng-angular-popup';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -12,10 +13,11 @@ export class VaccineDialogComponent implements OnInit {
 
   vaccineForm!: FormGroup;
   actionBtn: string = "Save";
-
+ 
   constructor(
     private formBuilder: FormBuilder,
     private apiService: ApiService,
+    private toast: NgToastService,
     @Inject(MAT_DIALOG_DATA) public editData: any,
     private dialogRef: MatDialogRef<VaccineDialogComponent>
   ) { }
@@ -29,7 +31,6 @@ export class VaccineDialogComponent implements OnInit {
       vaccinated: ['', Validators.required],
       note: ['']
     })
-
     if (this.editData) {
       this.actionBtn = "Update";
       this.vaccineForm.controls['date'].setValue(this.editData.date);
@@ -42,17 +43,17 @@ export class VaccineDialogComponent implements OnInit {
   }
 
   AddData() {
-    if (!this.editData) { 
+    if (!this.editData) {
       if (this.vaccineForm.valid) {
         this.apiService.postVaccineData(this.vaccineForm.value)
           .subscribe({
             next: (res) => {
-              alert("Data Added Successfully");
+              this.toast.success({ detail: "Success Message", summary: "Data Added Successfully", duration: 4000 })
               this.vaccineForm.reset();
               this.dialogRef.close('save');
             },
             error: () => {
-              alert("Error while Adding Data")
+              this.toast.error({ detail: "Error Message", summary: "Error While Adding Data", duration: 5000 })
             }
           })
       }
@@ -63,15 +64,15 @@ export class VaccineDialogComponent implements OnInit {
   }
 
   UpdateData() {
-    this.apiService.updateVaccineData(this.vaccineForm.value, this.editData.id)
+    this.apiService.updateVaccineData(this.vaccineForm.value, this.editData._id)
       .subscribe({
         next: (res) => {
-          alert("Data Updated Successfully")
+          this.toast.success({ detail: "Success Message", summary: "Data Updated Successfully", duration: 4000 })
           this.vaccineForm.reset()
           this.dialogRef.close('update')
         },
         error: () => {
-          alert("Error while updating data")
+          this.toast.error({ detail: "Error Message", summary: "Error While Adding Data", duration: 5000 })
         }
       })
   }

@@ -13,7 +13,11 @@
     "DAILYRECORDS": "Daily Records",
     "FEED": "Feed",
     "SALES": "Sales / Weight",
+    "TOTALSOLDBIRD":"Total Sold Birds",
+
+    "TOTALVACCINATED":"Total vaccinated birds",
     "VACCINATION": "Vaccination",
+    "TOTALEXPENSE":"Total Expense",
     "EXPENSES": "Daily Expenses",
     "ABOUTUS": "About Us",
     "CONTACTUS": "Contact Us",

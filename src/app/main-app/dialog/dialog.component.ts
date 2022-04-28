@@ -1,7 +1,8 @@
 import { ApiService } from './../../services/api.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, Inject, Injectable, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-dialog',
@@ -11,10 +12,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class DialogComponent implements OnInit {
 
   actionBtn: string = "Save";
-
   farmForm!: FormGroup;
 
-  constructor(private fromBuilder: FormBuilder, private api: ApiService,
+  constructor(
+    private fromBuilder: FormBuilder,
+    private api: ApiService,
+    private toast: NgToastService,
     @Inject(MAT_DIALOG_DATA) public editData: any,
     private dialogRef: MatDialogRef<DialogComponent>
   ) { }
@@ -43,36 +46,38 @@ export class DialogComponent implements OnInit {
       this.farmForm.controls['note'].setValue(this.editData.note);
     }
   }
-
+  
   AddData() {
     if (!this.editData) {
       if (this.farmForm.valid) {
         this.api.postData(this.farmForm.value)
           .subscribe({
             next: (res) => {
-              alert("Data Added Successfully");
+              console.log(this.farmForm.value)
+              this.toast.success({ detail: "Success Message", summary: "Data Added Successfully", duration: 4000 })
               this.farmForm.reset();
               this.dialogRef.close('save');
             },
             error: () => {
-              alert("Error while Adding Data")
+              this.toast.error({ detail: "Error Message", summary: "Error While Adding Data", duration: 5000 })
             }
           })
       }
-    } else {
+    }
+    else {
       this.updateData();
     }
   }
   updateData() {
-    this.api.putData(this.farmForm.value, this.editData.id)
+    this.api.putData(this.farmForm.value, this.editData._id)
       .subscribe({
         next: (res) => {
-          alert("Product Updated Successfully")
+          this.toast.success({ detail: "Success Message", summary: "Data Updated Successfully", duration: 4000 })
           this.farmForm.reset();
           this.dialogRef.close('update')
         },
         error: () => {
-          alert("Error while Updating Product")
+          this.toast.error({ detail: "Error Message", summary: "Error While Updating Data", duration: 5000 })
         }
       })
   }

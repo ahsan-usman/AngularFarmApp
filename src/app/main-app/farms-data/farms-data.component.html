@@ -1,0 +1,67 @@
+<button type="button" class="btn text-light p-2 m-4" style="background-color: #DDA063;" [routerLink]="['/mainapp/flockData']" routerLinkActive="router-link-active" >Add New Flock Data</button>
+
+<div class="row">
+  <div class="col-4">
+    <div class="container">
+      <form [formGroup]="farmData">
+        <div class="form-group">
+          <h3 class="SelectedHeading"> Enter Farm Name </h3>
+          <mat-form-field appearance="outline">
+            <mat-label>Enter Farm Name</mat-label>
+            <input type="text" formControlName="farmName" matInput placeholder="Enter Farm Name">
+          </mat-form-field>
+
+        </div>
+
+        <div class="form-group">
+          <h3 class="SelectedHeading"> Enter Total Birds </h3>
+          <mat-form-field appearance="outline">
+            <mat-label>Enter Total Birds</mat-label>
+            <input type="number" formControlName="totalBirds" matInput placeholder="Total Birds">
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <h3 class="SelectedHeading"> Enter Farm Location </h3>
+          <mat-form-field appearance="outline">
+            <mat-label>Enter Farm Location</mat-label>
+            <input type="text" formControlName="location" matInput placeholder="Location">
+          </mat-form-field>
+        </div>
+
+        <button type="button" class="btn text-light mb-3" style="background-color: #DDA063;" id="btn"
+          (click)="onSubmit()" *ngIf="addButton">Add
+          Farm Data</button>
+
+        <button type="button" class="btn text-light mb-3" style="background-color: #DDA063;" id="btn"
+          (click)="updateData()" *ngIf="showButton">Update
+          Farm Data</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-7">
+    <div class="container-table">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th class="id" scope="col">Farm Id</th>
+            <th scope="col">Farm Name</th>
+            <th scope="col">Total Birds</th>
+            <th scope="col">Location</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let data of farmDataRecord">
+          <tr>
+            <td class="id">{{data._id}}</td>
+            <td>{{data.farmName}}</td>
+            <td>{{data.totalBirds}}</td>
+            <td>{{data.location}}</td>
+            <td><button class="btn text-light m-2" style="background-color: #DDA063;"
+                (click)="editData(data)">Edit</button> <button class="btn btn-danger"
+                (click)="deleteData(data._id)">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

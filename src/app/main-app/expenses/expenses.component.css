@@ -35,6 +35,9 @@ table {
   button{
     display: none;
   }
+  #none{
+    display: none;
+  }
   .mat-form-field {
     display: none;
   }
@@ -114,5 +117,23 @@ table {
   flex-shrink: 0;
 }
 
+.SelectedDataStyle{
+  text-align: center;
+  font-family: 'Raleway';
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 80px;
+  color: #D8944E;
+}
 
-
+.SelectedHeading{
+  font-family: 'Raleway';
+  font-size: 20px;
+  font-weight: 600;
+}
+h1{
+  font-family: 'Raleway';
+  font-weight:500;
+  font-size: 22px;
+  color: #D8944E;
+}

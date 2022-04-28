@@ -1,41 +1,40 @@
-<h1 class="display-4 text-center" style="font-family: 'Assitant', sans-serif;">Sales and Weight</h1>
+<h1 class="display-4 text-center" style="font-family: 'Assitant', sans-serif;">Expenses Details</h1>
 <div mat-dialog-content>
-   <form [formGroup]="saleForm">
+  <form [formGroup]="ExpenseForm">
     <mat-form-field appearance="outline">
-        <mat-label>Select Date</mat-label>
-        <input formControlName="date" matInput [matDatepicker]="picker">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+      <mat-label>Select Date</mat-label>
+      <input formControlName="date" matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-        <mat-label>Utility Bills</mat-label>
-        <input formControlName="utility" matInput type="number" placeholder="Enter Utility Bills Here">
-        <mat-hint>Electricity, Gas, Water and other Bills</mat-hint>
+      <mat-label>Utility Bills</mat-label>
+      <input formControlName="utility" matInput type="number" placeholder="Enter Utility Bills Here">
+      <mat-hint>Electricity, Gas, Water and other Bills</mat-hint>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-        <mat-label>Salary</mat-label>
-        <input formControlName="salary" matInput type="number" placeholder="Enter Employee Salary Here">
-        <mat-hint>Enter Employees salary here</mat-hint>
+      <mat-label>Salary</mat-label>
+      <input formControlName="salary" matInput type="number" placeholder="Enter Employee Salary Here">
+      <mat-hint>Enter Employees salary here</mat-hint>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-        <mat-label>Maintenance Cost</mat-label>
-        <input formControlName="maintenance" matInput type="number" placeholder="Enter Maintenance Cost">
-        <mat-hint>Enter Maintenance Cost</mat-hint>
+      <mat-label>Maintenance Cost</mat-label>
+      <input formControlName="maintenance" matInput type="number" placeholder="Enter Maintenance Cost">
+      <mat-hint>Enter Maintenance Cost</mat-hint>
     </mat-form-field>
 
     <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Note</mat-label>
-        <textarea formControlName="note" matInput placeholder="Enter Any Additional Information Here."></textarea>
-        <mat-hint>Any Additional Information</mat-hint>
+      <mat-label>Note</mat-label>
+      <textarea formControlName="note" matInput placeholder="Enter Any Additional Information Here."></textarea>
+      <mat-hint>Any Additional Information</mat-hint>
     </mat-form-field>
-   </form>
+  </form>
 </div>
 
 <div mat-dialog-actions [align]="'end'">
-    <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
-    <button style="margin-left: 8px;"  mat-raised-button color="primary" (click)="AddData()">Save</button>
+  <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+  <button style="margin-left: 8px;" mat-raised-button color="primary" (click)="AddData()">{{actionBtn}}</button>
 </div>
-

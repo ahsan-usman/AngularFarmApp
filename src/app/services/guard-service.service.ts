@@ -1,19 +1,43 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt'
 
 @Injectable({
   providedIn: 'root'
 })
 export class GuardServiceService {
 
-  constructor(private http: HttpClient) { }
+  jwtHelper = new JwtHelperService();
 
-  public loginCall(email:string){
-    
-    return this.http.get<any>("http://localhost:3000/signupUsers?email="+email)
+  constructor() { } 
+
+  isAuthenticated(): boolean {
+    let token = localStorage.getItem('token')
+    if (!token) {
+      return false
+    }
+    try {
+      if (!this.jwtHelper.isTokenExpired(token)) {
+        return true;
+      }
+    }
+    catch (e) {
+      return false
+    }
+    return false;
   }
-  isAuthenticated(): boolean{
-    let user = localStorage.getItem('userData')
-    return user != null;
+
+  getToken() {
+    return localStorage.getItem('token'); 
+  }
+
+  getId() {
+    return localStorage.getItem('userid');
+  }
+
+  getFarmId() {
+    return localStorage.getItem('farmid')
+  }
+  getFlockId() {
+    return localStorage.getItem('flockid')
   }
 }

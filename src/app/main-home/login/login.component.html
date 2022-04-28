@@ -1,0 +1,47 @@
+<app-home-header></app-home-header>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="">
+            <a class="navbar-brand" style="display: flex;justify-content: center; margin-bottom: 50px;">
+              <img src="/assets/logo.png">
+            </a>
+            <h1>{{ 'HOME.LOGIN' | translate }}</h1>
+            <h6>{{ 'HOME.LOGINHEAD' | translate }}</h6>
+          </div>
+          <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <div class="form-group">
+              <label for="exampleInputEmail1">{{ 'HOME.EMAIL' | translate }}</label>
+              <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="{{ 'HOME.ENTEREMAIL' | translate }}">
+              <small class="text-danger" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"> *
+                Email Address is
+                Required</small>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">{{ 'HOME.PASSWORD' | translate }}</label>
+              <div class="input-container">
+                <input [type]="hide ? 'password': 'text'" formControlName="password" class="form-control"
+                  id="exampleInputPassword1" placeholder="{{ 'HOME.ENTERPASSWORD' | translate }}">
+                <i class="material-icons" matSuffix (click)="hide = !hide">{{hide? 'visibility':'visibility_off'}}</i>
+              </div>
+              <small class="text-danger"
+                *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"> * Password is
+                Required</small>
+            </div>
+            <button type="submit" class="btn btn-block " id="btn" [disabled]='!loginForm.valid'>{{ 'HOME.LOGIN' |
+              translate }}</button>
+
+            <h2 style="color: #282828; text-align: center; margin: 10px;">{{ 'HOME.OR' | translate }}</h2>
+
+            <button type="submit" class="btn btn-block" id="btnn" routerLink='/homeapp/signup'>{{ 'HOME.NOACCOUNT' |
+              translate }}</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
