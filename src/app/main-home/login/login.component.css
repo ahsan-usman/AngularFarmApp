@@ -1,0 +1,116 @@
+body {
+    background: linear-gradient(-45deg, #eac59e, #fbf5ef, #e6bb8e, #fbf5ee);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    width: 100%;
+    height: auto;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+.container{
+  display: flex;
+  justify-content: center;
+}
+.card{
+  margin-bottom: 50px;
+  border-radius: 5px;
+  width: 500px;
+  padding: 40px;
+  background: linear-gradient(to top, #F0D9BD 0%, #FEECD4 120%);
+  box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.2), 0 8px 25px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 30px;
+} 
+
+[dir="rtl"].card h1 {
+  text-align: left;
+}
+[dir="ltr"].card h1 {
+  text-align: right;
+}
+
+.card h1{
+  color: #262525;
+  font-size: 60px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  font-family: 'Raleway','poppins';
+  
+}
+.card h6{
+  color: #282828;
+  font-weight: 400;
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-family: 'Raleway','Assistant';
+}
+
+label{
+  color: #262525;
+  font-family: 'Raleway','poppins';
+}
+
+input{
+  border-radius: 5px;
+}
+
+#btn{
+  border-radius: 5px;
+  background-color: #D8944E;
+  border: black;
+  padding: 10px;
+  margin-top: 25px;
+  font-family: 'Assistant','Raleway';
+  font-size: 20px;
+  color: white;
+  
+}
+
+#btnn{
+  border-radius: 5px;
+  background-color: #D8944E;
+  padding: 10px;
+  font-family: 'Assistant','Raleway';
+  font-size: 20px;
+  color: white;
+  ; 
+}
+
+@media screen and (max-width: 450px) {
+  body {background-color: #eac59e; height: 100%; width: 100%;}
+  .card{
+    width: 250px;
+    padding: 10px;
+    background: linear-gradient(to top, #F0D9BD 0%, #FEECD4 120%);
+  } 
+  
+}
+
+.form-control.ng-touched.ng-invalid{
+  border: 1px solid red;
+}
+.form-control.ng-touched.ng-valid{
+  border: 1px solid green;
+}
+.input-container  {
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  flex-direction: row-reverse;
+}
+.input-container i{
+  position: absolute;
+  align-self: center;
+  margin-right: 5px;
+  cursor: pointer;
+}

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  constructor(public translate: TranslateService) {
+    translate.addLangs(['english', 'urdu','arabic']);
+    translate.setDefaultLang('english');
+
+    const browserLang = translate.getBrowserLang()!;
+    translate.use(browserLang.match(/english|urdu|arabic/) ? browserLang : 'english');
+
+  }
+
   title = 'Farm';
   // constructor(private HttpClient: HttpClient){
   //   this.ab()

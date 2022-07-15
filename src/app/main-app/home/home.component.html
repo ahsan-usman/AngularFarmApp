@@ -1,0 +1,180 @@
+<div id="main">
+  <div class="jumbotron jumbotron-fluid" style="background-color:#f4f4ec">
+    <div class="container">
+      <h1 style="font-family: 'Raleway'; font-weight:800; font-size: 25px;">{{'HOME.TITLE' | translate}}</h1>
+      <p class="lead">{{'HOME.DAILYRECORDSDETAIL' | translate}}</p>
+      <hr class="my-3">
+      <div id="root">
+        <h1 class="text-center p-3">Selected Flock Name :{{flockName| titlecase}}</h1>
+        <h1 class="text-center p-3">Selected Farm Name : {{farmName | titlecase}}</h1>
+        <div class="container pt-3">
+          <div class="row align-items-stretch">
+            <div class="c-dashboardInfo col-lg-3 col-md-3">
+              <div class="wrap">
+                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">{{'HOME.TOTALBIRDS' |
+                  translate}}</h4><span class="hind-font caption-12 c-dashboardInfo__count">{{totalBirds}}</span>
+              </div>
+            </div>
+            <div class="c-dashboardInfo col-lg-3 col-md-3">
+              <div class="wrap">
+                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">{{'HOME.MORTALITY' |
+                  translate}}</h4><span class="hind-font caption-12 c-dashboardInfo__count">{{totalMortality}}</span>
+              </div>
+            </div>
+
+            <div class="c-dashboardInfo col-lg-3 col-md-3">
+              <div class="wrap">
+                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">{{'HOME.TOTALFEED' |
+                  translate}}</h4><span class="hind-font caption-12 c-dashboardInfo__count">{{totalFeed}}</span>
+              </div>
+            </div>
+            <div class="c-dashboardInfo col-lg-3 col-md-3">
+              <div class="wrap">
+                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">{{'HOME.TOTALUSEDFEED'
+                  | translate}}</h4>
+                <span class="hind-font caption-12 c-dashboardInfo__count">{{usedFeed}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="root">
+        <div class="container pt-5">
+          <div class="row align-items-stretch">
+            <div class="c-dashboardInfo col-lg-3 col-md-3">
+              <div class="wrap">
+                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">{{'HOME.TOTALWEIGHT' |
+                  translate}}</h4><span class="hind-font caption-12 c-dashboardInfo__count">{{Weight}}</span>
+              </div>
+            </div>
+
+            <div class="c-dashboardInfo col-lg-3 col-md-3">
+              <div class="wrap">
+                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">{{'HOME.DIESELUSED' |
+                  translate}}</h4>
+                <span class="hind-font caption-12 c-dashboardInfo__count">{{diesel}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div style="margin-top: 10px ;">
+      <div class="text-right">
+        <button class="btn text-light" style="background-color: #D8944E;" (click)="openDialog()">{{'HOME.ADDDATA' |
+          translate}}</button>
+      </div>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Search</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search Here" #input>
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <table mat-table matSort [dataSource]="dataSource" matTableExporter #exporter="matTableExporter"
+          [hiddenColumns]="[11,12]">
+
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef class="form" mat-sort-header> Date </th>
+            <td mat-cell *matCellDef="let row"> {{row.date | date}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="age">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="form"> Age </th>
+            <td mat-cell *matCellDef="let row" style="padding-left:6px; color: red;"> {{row.age}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="mortality">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="form"> Mortality </th>
+            <td mat-cell *matCellDef="let row"> {{row.mortality}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cumMortality">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="form"> Cum Mortality </th>
+            <td mat-cell *matCellDef="let row;  let ind = index"> {{row.cumMortality[ind]}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cumMortalityPercent">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="form"> Cum Mortality Percent </th>
+            <td mat-cell *matCellDef="let row; let c = index"> {{row.cumMortalityPercent[c] | number : '1.2-2'}}% </td>
+          </ng-container>
+
+          <ng-container matColumnDef="feed">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="form"> Feed </th>
+            <td mat-cell *matCellDef="let row"> {{row.feed}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="usedFeed">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="form"> Used Feed </th>
+            <td mat-cell *matCellDef="let row;"> {{row.usedFeed}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cumFeed">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="form"> Cum Feed </th>
+            <td mat-cell *matCellDef="let row; let cf = index"> {{row.cumFeed[cf]}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="diesel">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="form"> Diesel </th>
+            <td mat-cell *matCellDef="let row"> {{row.diesel}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="cumDiesel">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="form"> Cum Diesel </th>
+            <td mat-cell *matCellDef="let row; let d=index"> {{row.cumDiesel[d]}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="weight">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="form"> Weight </th>
+            <td mat-cell *matCellDef="let row"> {{row.weight}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="note">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="form"> Note </th>
+            <td mat-cell *matCellDef="let row"> {{row.note}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-icon-button color="primary" (click)="editData(row)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteData(row._id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          ->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">Select a Farm{{input.value}}</td>
+          </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[40, 80, 120, 160]" aria-label="Select page of users"></mat-paginator>
+      </div>
+
+      <div class="m-3" style="align-items: flex-end; display: flex; flex-direction: column;">
+        <button class="btn text-light mt-3 mb-3" style="background-color: #D8944E; display: flex;" (click)="print()">
+          <mat-icon class="material-icons-outlined" style="color: white;">print</mat-icon>{{'HOME.PRINT' |
+          translate}}
+        </button>
+
+        <button class="btn text-light mt-3 mb-3" style="background-color: #217346; display: flex;"
+          (click)="exporter.exportTable('xlsx',{fileName:'DailyRecords'})">
+          <mat-icon class="material-icons-outlined" style="color: white;">upload_file</mat-icon>
+          Export to Excel
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

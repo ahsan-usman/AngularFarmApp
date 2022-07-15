@@ -1,0 +1,84 @@
+<div class="row">
+    <div class="col-4">
+        <div class="container">
+            <form [formGroup]="flockData">
+
+                <div class="form-group">
+                    <h3 class="SelectedHeading"> Enter Flock Name </h3>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter Flock Name</mat-label>
+                        <input type="text" formControlName="flockName" matInput placeholder="Enter Flock Name">
+                    </mat-form-field>
+
+                </div>
+
+                <div class="form-group">
+                    <h3 class="SelectedHeading"> Enter Total Birds </h3>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter Total Birds</mat-label>
+                        <input type="number" formControlName="totalBirds" matInput placeholder="Total Birds">
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                    <h3 class="SelectedHeading"> Enter Flock Start Date </h3>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Starting Date</mat-label>
+                        <input formControlName="startDate" matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                    <h3 class="SelectedHeading">Select Farm</h3>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Select Farm</mat-label>
+                        <mat-select [(ngModel)]="selectedValue" name="farms" placeholder="Select Farm"
+                            (ngModelChange)="SelectDropDown($event)" formControlName="farmName">
+                            <mat-option *ngFor="let option of selectoptions" [value]="option.farmName">
+                                {{option.farmName}} - - {{option._id}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <p class="SelectedDataStyle"> Selected Farm : {{selectedValue}} </p>
+                </div>
+
+                <button type="button" class="btn text-light mb-3" style="background-color: #DDA063;" id="btn"
+                    (click)="onSubmit()" *ngIf="addButton">Add
+                    Flock Data</button>
+
+                <button type="button" class="btn text-light mb-3" style="background-color: #DDA063;" id="btn"
+                    (click)="updateData()" *ngIf="showButton">Update
+                    Flock Data</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-7">
+        <div class="container-table">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="id" scope="col">Farms Id</th>
+                        <th scope="col">Flock Name</th>
+                        <th scope="col">Total Birds</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">Farm Name</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let data of flockRecord">
+                    <tr>
+                        <td class="id">{{data.farms_id}}</td>
+                        <td>{{data.flockName}}</td>
+                        <td>{{data.totalBirds}}</td>
+                        <td>{{data.startDate | date}}</td>
+                        <td>{{data.farmName}}</td>
+                        <td><button class="btn text-light m-2" style="background-color: #DDA063;"
+                                (click)="editData(data)">Edit</button> <button class="btn btn-danger"
+                                (click)="deleteData(data._id)">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>

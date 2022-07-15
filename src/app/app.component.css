@@ -1,0 +1,78 @@
+#TopBar{
+    background-color: #d8934ee1;
+    color: #282828;
+    height: auto;
+    padding: 10px 150px ;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    overflow: auto;
+}
+
+.contactdata{
+    font-size: 14px;
+    color: white;
+    font-weight: 500;
+    font-family: 'Raleway','Assistant';
+}
+
+.TopBarContactDetails{
+  margin-right: 20px;
+
+}
+
+.TopBarContentText{
+    font-size: 15px;
+    color: white;
+    font-weight: 500;
+    font-family: 'Raleway','Assistant';
+}
+
+.vl {
+    border-left: 1px solid white;
+    height: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+i{
+    color: white;
+    font-size: 16px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+@media screen and (max-width: 550px) {
+    #TopBar{
+        height: auto;
+        padding:10px 10px;
+    }
+    #TopBarContact{display: none;}
+    .vl {display: none;}
+    .notimp{
+    display: block;
+    margin: 5px;}
+}
+
+@media screen and (max-width: 900px){
+    #TopBar{
+        height: auto;
+        padding:10px 10px;
+    }
+    #TopBarContact{
+        display: block;
+        margin: 10px;}
+    .vl {display: none;}
+
+    .notimp{
+        display: block;
+        margin: 5px;
+    }
+    
+}
+
+@media print{
+    #TopBar{
+        display: none;
+    } 
+ }

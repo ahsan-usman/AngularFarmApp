@@ -1,0 +1,64 @@
+<h1 class="display-4 text-center" style="font-family: 'Assitant', sans-serif;">Sales and Weight</h1>
+<div mat-dialog-content>
+    <form [formGroup]="saleForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Select Date</mat-label>
+            <input formControlName="date" matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Truck Number</mat-label>
+            <input formControlName="truckNumber" matInput type="text" placeholder="Enter Truck Number">
+            <mat-hint>Enter Truck Number Here</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Driver Name</mat-label>
+            <input formControlName="driver" matInput type="text" placeholder="Enter Driver Name">
+            <mat-hint>Enter Driver Name</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Empty Weight</mat-label>
+            <input formControlName="emptyWeight" matInput type="number" placeholder="Enter Empty Weight">
+            <mat-hint>Enter Empty weight of truck here</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Loaded Weight</mat-label>
+            <input formControlName="loadedWeight" matInput type="number" placeholder="Enter Loaded Weight">
+            <mat-hint>Enter Loaded weight of truck here</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Rate</mat-label>
+            <input formControlName="rate" matInput type="number" placeholder="Enter Rate">
+            <mat-hint>Enter Rate here</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Birds</mat-label>
+            <input formControlName="birds" matInput type="number" placeholder="Enter Brids">
+            <mat-hint>Enter Birds here</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Gate Pass</mat-label>
+            <input formControlName="gatePass" matInput type="number" placeholder="Enter Gate Pass No">
+            <mat-hint>Enter Gate Pass No</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Note</mat-label>
+            <textarea formControlName="note" matInput placeholder="Enter Any Additional Information Here."></textarea>
+            <mat-hint>Any Additional Information</mat-hint>
+        </mat-form-field>
+    </form>
+</div>
+
+<div mat-dialog-actions [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+    <button style="margin-left: 8px;" mat-raised-button color="primary" (click)="AddData()">Save</button>
+</div>

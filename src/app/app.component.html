@@ -1,4 +1,46 @@
+<div id="TopBar">
+    <span id="TopBarContact">
+        <span class="TopBarContactDetails">
+            <i class="bi bi-envelope" id="icon1"></i>
+            <span class="contactdata">ahsanusman002@gmail.com</span>
+        </span>
+        <span class="TopBarContactDetails">
+            <i class="bi bi-telephone" id="icon2"></i>
+            <span class="contactdata">{{'HOME.CONTACT'| translate}}: +92-310-5054604</span>
+        </span>
+    </span>
+
+    <span id="TopBarContent">
+        <span class="lanuguage">
+            <i class="bi bi-translate"
+                style="font-style: normal; font-family: 'Raleway','Assistant'; font-weight: 500;">
+                {{'HOME.SELECT'|translate}}</i>
+            <span class="TopBarContentText">
+                <select #langSelect (change)="translate.use(langSelect.value)"
+                    style="background-color: transparent; color: white; border: none; outline: none; width: 15px; cursor: pointer;">
+                    <option *ngFor="let lang of translate.getLangs()" [value]="lang"
+                        [selected]="lang === translate.currentLang" style="color: #282828;">{{
+                        lang }}</option>
+                </select>
+            </span>
+        </span>
+
+        <span class="vl"></span>
+        <span class="notimp">
+            <i class="bi bi-person"></i>
+            <span class="TopBarContentText" routerLink=""
+                style="cursor: pointer;">{{'HOME.LOGIN'|translate}}</span>
+        </span>
+        <span class="vl"></span>
+        <span class="notimp">
+            <i class="bi bi-pencil"></i>
+            <span class="TopBarContentText" routerLink="/homeapp/signup"
+                style="cursor: pointer;">{{'HOME.SIGNUP'|translate}}</span>
+        </span>
+    </span>
+</div>
+
+<ngx-ui-loader></ngx-ui-loader>
 <router-outlet></router-outlet>
 <lib-ng-toast></lib-ng-toast>
-
-
+<app-footer></app-footer>
