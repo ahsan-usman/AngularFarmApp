@@ -1,0 +1,132 @@
+<nav class="navbar navbar-expand-lg navbar-light p-3" style="background-color: #F0D9BD;">
+  <span class="threelines" style="font-size:30px;cursor:pointer;color: white;" [routerLink]="['/mainapp/dashboard']"
+    routerLinkActive="router-link-active" [queryParams]="{farmName: FarmName , flockName: FlockName}">&#8666;</span>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+    aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand pl-5 pr-5" routerLink="/mainapp/dashboard">
+    <img src="/assets/logo.png" class="d-inline-block align-top" alt="Farm Management System">
+  </a>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link text-dark ml-5" routerLink="/mainapp/dashboard"
+          [queryParams]="{farmName: FarmName , flockName: FlockName}">{{ 'HOME.DASHBOARD' | translate }}</a>
+      </li>
+
+      <li class="nav-item" style="cursor: pointer;">
+        <div class="btn-group">
+          <a class="nav-link text-dark ml-5 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            {{ 'HOME.RECORDS' |translate| titlecase }}
+          </a>
+          <div class="dropdown-menu px-3 py-2" style="line-height: 2rem; font-family: 'Raleway'; cursor: pointer;">
+            <a class="dropdown-item" [routerLink]="['/mainapp/home']" routerLinkActive="router-link-active"
+              [queryParams]="{farmName: FarmName , flockName: FlockName}">Daily Records</a>
+            <a class="dropdown-item" [routerLink]="['/mainapp/feed']" routerLinkActive="router-link-active"
+              [queryParams]="{farmName: FarmName , flockName: FlockName}">Feed Records</a>
+            <a class="dropdown-item" [routerLink]="['/mainapp/vaccine']" routerLinkActive="router-link-active"
+              [queryParams]="{farmName: FarmName , flockName: FlockName}">Vaccination
+              Records</a>
+            <a class="dropdown-item" [routerLink]="['/mainapp/expenses']" routerLinkActive="router-link-active"
+              [queryParams]="{farmName: FarmName , flockName: FlockName}">Expenses
+              Records</a>
+            <a class="dropdown-item" [routerLink]="['/mainapp/saleHome']" routerLinkActive="router-link-active"
+              [queryParams]="{farmName: FarmName , flockName: FlockName}">Sales/Weight
+              Records</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" [routerLink]="['/mainapp/farmData']" routerLinkActive="router-link-active">Add
+              Farm</a>
+            <a class="dropdown-item" [routerLink]="['/mainapp/flockData']" routerLinkActive="router-link-active">Add
+              New Flock</a>
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <div class="dropdown">
+          <a class="nav-link text-dark ml-5 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
+            {{ 'HOME.CALCULATOR' | translate }}
+          </a>
+          <div class="dropdown-menu" cdkDrag>
+            <form>
+              <div>
+                <div class="calculator card">
+                  <div><input type="text" class="calculator-screen z-depth-1" value="{{input}}" /></div>
+                  <div><input type="text" class="calculator-screen z-depth-1" value="{{result}}" /></div>
+
+                  <div class="calculator-keys">
+
+                    <button type="button" class="operator btn" style="background-color: #D8944E; color: white;"
+                      value="+" (click)="pressNum('+')">+</button>
+                    <button type="button" class="operator btn" style="background-color: #D8944E; color: white;"
+                      value="-" (click)="pressNum('-')">-</button>
+                    <button type="button" class="operator btn" style="background-color: #D8944E; color: white;"
+                      value="*" (click)="pressNum('*')">&times;</button>
+                    <button type="button" class="operator btn" style="background-color: #D8944E; color: white;"
+                      value="/" (click)="pressNum('/')">&divide;</button>
+
+                    <button type="button" value="7" class="btn btn-light waves-effect"
+                      (click)="pressNum('7')">7</button>
+                    <button type="button" value="8" class="btn btn-light waves-effect"
+                      (click)="pressNum('8')">8</button>
+                    <button type="button" value="9" class="btn btn-light waves-effect"
+                      (click)="pressNum('9')">9</button>
+
+                    <button type="button" value="4" class="btn btn-light waves-effect"
+                      (click)="pressNum('4')">4</button>
+                    <button type="button" value="5" class="btn btn-light waves-effect"
+                      (click)="pressNum('5')">5</button>
+                    <button type="button" value="6" class="btn btn-light waves-effect"
+                      (click)="pressNum('6')">6</button>
+
+                    <button type="button" value="1" class="btn btn-light waves-effect"
+                      (click)="pressNum('1')">1</button>
+                    <button type="button" value="2" class="btn btn-light waves-effect"
+                      (click)="pressNum('2')">2</button>
+                    <button type="button" value="3" class="btn btn-light waves-effect"
+                      (click)="pressNum('3')">3</button>
+
+                    <button type="button" value="0" class="btn btn-light waves-effect"
+                      (click)="pressNum('0')">0</button>
+                    <button type="button" class="decimal function btn btn-secondary" value="."
+                      (click)="pressNum('.')">.</button>
+                    <button type="button" class="all-clear function btn btn-danger btn-sm" value="all-clear"
+                      (click)="allClear()">AC</button>
+                    <button type="button" class="equal-sign operator btn btn-default" value="="
+                      (click)="getAnswer()">=</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="pr-2">
+      <button class="selectBtn" *ngIf="shouldShowFarmSelect">
+        <mat-select [(ngModel)]="FarmName" name="farms" placeholder="Select Farm" (ngModelChange)="SelectFarm($event)">
+          <mat-option *ngFor="let option of selectFarmValue" [value]="option.farmName">
+            {{option.farmName}}
+          </mat-option>
+        </mat-select>
+      </button>
+    </div>
+    <div class="pr-2">
+      <button class="selectBtn" *ngIf="shouldShowFarmSelect">
+        <mat-select [(ngModel)]="FlockName" name="flock" placeholder="Select Flock"
+          (ngModelChange)="SelectFLock($event)">
+          <mat-option *ngFor="let option of selectFlockValue" [value]="option.flockName">
+            {{option.flockName}}
+          </mat-option>
+        </mat-select>
+      </button>
+    </div>
+    <button class="btn pr-3" type="button" routerLink="/mainapp/userProfile" style="font-size:16px; color: #282828;"><i
+        class="bi bi-person-circle pr-2"></i>{{UserName}}</button>
+    <button class="btn btn-outline-dark my-2 my-sm-0 mr-3 p-2" type="button" (click)="logOut()"
+      routerLink="">{{ 'HOME.LOGOUT' | translate }}</button>
+  </div>
+</nav>

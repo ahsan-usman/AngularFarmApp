@@ -1,0 +1,292 @@
+<div class="row">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white" id="sideNav"
+        style="width: 300px; background-color: #D8944E;">
+        <h3 class="text-center">Dashboard</h3>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a class="nav-link text-white" routerLink="/mainapp/home" [queryParams]="{farmName: FarmName, flockName: FlockName}"><i
+                        class="fa fa-home"></i><span class="links">{{ 'HOME.HOME' | translate }}</span> </a>
+            </li>
+            <li> <a class="nav-link text-white" routerLink="/mainapp/dashboard" [queryParams]="{farmName: FarmName, flockName: FlockName}"> <i class="fa fa-dashboard"></i><span
+                        class="links">{{ 'HOME.DASHBOARD' | translate }}</span>
+                </a>
+            </li>
+            <li> <a class="nav-link text-white" routerLink="/mainapp/feed" [queryParams]="{farmName: FarmName, flockName: FlockName}"><i
+                        class="fa fa-cutlery"></i><span class="links">{{ 'HOME.FEED' | translate }}</span> </a>
+            </li>
+            <li>
+                <a class="nav-link text-white" routerLink="/mainapp/vaccine" [queryParams]="{farmName: FarmName, flockName: FlockName}">
+                    <i class="fa fa-user-md"></i><span class="links">{{ 'HOME.VACCINATION' | translate }}</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white" routerLink="/mainapp/saleHome" [queryParams]="{farmName: FarmName, flockName: FlockName}">
+                    <i class="fa fa-sellsy"></i><span class="links">{{ 'HOME.SALES' | translate }}</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white" routerLink="/mainapp/expenses" [queryParams]="{farmName: FarmName, flockName: FlockName}">
+                    <i class="fa fa-money"></i><span class="links">{{ 'HOME.EXPENSES' | translate }}</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white" routerLink="/homeapp/contact"> <i class="fa fa-phone"></i><span
+                        class="links">Contact
+                        Developer</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white" routerLink="/mainapp/farmData"> <i class="fa fa-plus"></i><span
+                        class="links">Add New Farm</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white" routerLink="/mainapp/flockData"> <i class="fa fa-square-o"></i><span
+                        class="links">Add New Flock</span>
+                </a>
+            </li>
+            
+            <hr>
+            <li>
+                <i style=" display: block;text-align: center;font-size: 25px; color: white; margin-top: 15px; cursor: pointer;"
+                    class="bi bi-person-circle" routerLink="/mainapp/userProfile"></i>
+                <div class="text-center ">
+                    <button class="btn text-center text-light" style="font-size:18px;"
+                        routerLink="/mainapp/userProfile">{{UserName}}</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="col p-0">
+        <div class="jumbotron jumbotron-fluid" style="background-color:#f4f4ec">
+            <div class="container text-center">
+                <div>
+                    <div class="row">
+                        <div class="col">
+                            <h2 class="SelectedHeading">Select Farm</h2>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Select Farm</mat-label>
+                                <mat-select [(ngModel)]="FarmName" name="farms" placeholder="Select Farm"
+                                    (ngModelChange)="SelectDropDown($event)">
+                                    <mat-option *ngFor="let option of selectFarmOptions" [value]="option.farmName">
+                                        {{option.farmName}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <p class="SelectedDataStyle"> Selected Farm : {{FarmName}} </p>
+                        </div>
+                        <div class="col">
+                            <h2 class="SelectedHeading">Select Flock Number</h2>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Select Flock</mat-label>
+                                <mat-select [(ngModel)]="FlockName" name="flock" placeholder="Select Flock"
+                                    (ngModelChange)="flockDropDown($event)">
+                                    <mat-option *ngFor="let option of flockDetails" [value]="option.flockName">
+                                        {{option.flockName}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <p class="SelectedDataStyle"> Selected Flock No : {{FlockName}} </p>
+                        </div>
+                    </div>
+
+                    <h1 style="font-family: 'Raleway'; font-weight:800; font-size: 50px;">{{'HOME.DASHBOARD' |
+                        translate}}
+                    </h1>
+                    <hr class="my-3">
+                    <div id="root">
+                        <div class="container pt-3">
+                            <div class="row align-items-stretch">
+                                <div class="c-dashboardInfo col-lg-3 col-md-3">
+                                    <div class="wrap">
+                                        <h4
+                                            class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
+                                            {{'HOME.TOTALBIRDS' |
+                                            translate}}</h4><span
+                                            class="hind-font caption-12 c-dashboardInfo__count">{{totalBirds}}</span>
+                                    </div>
+                                </div>
+                                <div class="c-dashboardInfo col-lg-3 col-md-3">
+                                    <div class="wrap">
+                                        <h4
+                                            class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
+                                            {{'HOME.MORTALITY' |
+                                            translate}}</h4><span
+                                            class="hind-font caption-12 c-dashboardInfo__count">{{totalMortality}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="c-dashboardInfo col-lg-3 col-md-3">
+                                    <div class="wrap">
+                                        <h4
+                                            class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
+                                            {{'HOME.TOTALFEED' |
+                                            translate}}</h4><span
+                                            class="hind-font caption-12 c-dashboardInfo__count">{{totalFeed}}</span>
+                                    </div>
+                                </div>
+                                <div class="c-dashboardInfo col-lg-3 col-md-3">
+                                    <div class="wrap">
+                                        <h4
+                                            class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
+                                            {{'HOME.TOTALUSEDFEED'
+                                            | translate}}</h4>
+                                        <span
+                                            class="hind-font caption-12 c-dashboardInfo__count">{{totalUsedFeed}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="root">
+                        <div class="container pt-3">
+                            <div class="row align-items-stretch">
+                                <div class="c-dashboardInfo col-lg-3 col-md-3">
+                                    <div class="wrap">
+                                        <h4
+                                            class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
+                                            {{'HOME.TOTALWEIGHT' |
+                                            translate}}</h4><span
+                                            class="hind-font caption-12 c-dashboardInfo__count">{{totalWeight}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="c-dashboardInfo col-lg-3 col-md-3">
+                                    <div class="wrap">
+                                        <h4
+                                            class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
+                                            {{'HOME.DIESELUSED' |
+                                            translate}}</h4>
+                                        <span class="hind-font caption-12 c-dashboardInfo__count">{{totalDiesel}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="c-dashboardInfo col-lg-3 col-md-3">
+                                    <div class="wrap">
+                                        <h4
+                                            class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
+                                            {{'HOME.TOTALEXPENSE'|translate}}</h4>
+                                        <span
+                                            class="hind-font caption-12 c-dashboardInfo__count">{{Expensetotal}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="c-dashboardInfo col-lg-3 col-md-3">
+                                    <div class="wrap">
+                                        <h4
+                                            class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
+                                            {{'HOME.TOTALVACCINATED'|translate}}</h4>
+                                        <span
+                                            class="hind-font caption-12 c-dashboardInfo__count">{{vaccinatedTotal}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="root">
+                        <div class="container pt-3">
+                            <div class="row align-items-stretch">
+                                <div class="c-dashboardInfo col-lg-3 col-md-3">
+                                    <div class="wrap">
+                                        <h4
+                                            class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">
+                                            {{'HOME.TOTALSOLDBIRD'|translate}}</h4><span
+                                            class="hind-font caption-12 c-dashboardInfo__count">{{totalSoldBirds}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button mat-raised-button style="background-color:#D8944E; color: white;" (click)="chartUpdate()">View
+                    Updated Charts</button>
+            </div>
+            <div id="root">
+                <div class="container pt-5 pd-5">
+                    <div class="row">
+                        <div class="chartStyle">
+                            <div class="chart">
+                                <canvas baseChart [data]="pieChartData" [type]="pieChartType"
+                                    [options]="pieChartOptions" [plugins]="pieChartPlugins">
+                                </canvas>
+                            </div>
+                        </div>
+                        <div class="chartStyle">
+                            <div class="chart">
+                                <canvas baseChart [data]="pieChartData2" [type]="pieChartType"
+                                    [options]="pieChartOptions" [plugins]="pieChartPlugins">
+                                </canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div style="padding-top: 10%;">
+                    <h1>{{ 'HOME.RECORDS' | translate }}</h1>
+                    <div class="container-fluid">
+                        <div class="row" style="padding: 20px;">
+                            <ng-template #jump let-data let-n="name" let-d="data" let-i="image">
+                                <div class="col-md-3 col-sm-4">
+                                    <div class="a-box" style="cursor: pointer;">
+                                        <div class="img-container">
+                                            <div class="img-inner">
+                                                <div class="inner-skew">
+                                                    <img src={{i}}>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-container">
+                                            <h3>{{n}}</h3>
+                                            <div>
+                                                {{d}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+
+                            <div routerLink="/mainapp/home" [queryParams]="{farmName: FarmName, flockName: FlockName}">
+                                <ng-container
+                                    *ngTemplateOutlet="jump; context:{name: ('HOME.DAILYRECORDS' | translate), data: ('HOME.DAILYRECORDSDETAIL' | translate), image: 'assets/DailyRecord.jpg'}">
+                                </ng-container>
+                            </div>
+                            <div routerLink="/mainapp/feed" [queryParams]="{farmName: FarmName, flockName: FlockName}">
+                                <ng-container
+                                    *ngTemplateOutlet="jump; context:{name: ('HOME.FEED' | translate), data: ('HOME.FEEDDETAIL' | translate), image:'assets/feed.jpg'}">
+                                </ng-container>
+                            </div>
+                            <div routerLink="/mainapp/saleHome" [queryParams]="{farmName: FarmName, flockName: FlockName}">
+                                <ng-container
+                                    *ngTemplateOutlet="jump; context:{name: ('HOME.SALES' | translate), data: ('HOME.SALESDETAIL' | translate), image: 'assets/saleRecord.jpg'}">
+                                </ng-container>
+                            </div>
+                            <div routerLink="/mainapp/vaccine" [queryParams]="{farmName: FarmName, flockName: FlockName}">
+                                <ng-container
+                                    *ngTemplateOutlet="jump; context:{name: ('HOME.VACCINATION' | translate), data: ('HOME.VACCINATIONDETAIL' | translate), image: 'assets/vaccine.jpg'}">
+                                </ng-container>
+                            </div>
+                            <div routerLink="/mainapp/expenses" [queryParams]="{farmName: FarmName, flockName: FlockName}">
+                                <ng-container
+                                    *ngTemplateOutlet="jump; context:{name:('HOME.EXPENSES' | translate), data: ('HOME.EXPENSESDETAIL' | translate), image: 'assets/expense.jpg'}">
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="map" style="margin-top:0px">
+        <google-map height="450px" width="100%" [zoom]="zoom" [center]="center" [options]="options">
+            <map-marker *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
+                [title]="marker.title" [options]="marker.options">
+            </map-marker>
+        </google-map>
+    </div>

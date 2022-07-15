@@ -1,0 +1,113 @@
+nav{
+  font-family: 'Assistant','Raleway';
+  font-size: 16px;
+  font-weight: 600;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+.calculator {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 300px;
+}
+
+.calculator-screen {
+  width: 100%;
+  height: 80px;
+  border: none;
+  background-color: #252525;
+  color: #fff;
+  text-align: right;
+  padding-right: 20px;
+  padding-left: 10px;
+  font-size: 3rem;
+}
+
+button {
+  height: 40px;
+  font-size: 1rem;
+}
+
+.equal-sign {
+  height: 98%;
+  grid-area: 2 / 4 / 6 / 5;
+}
+
+.calculator-keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  padding: 10px;
+}
+  
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #191919;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  font-family: 'Raleway','Assistant';
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 22px;
+  color: #F4f4ec;
+  display: block;
+  transition: 0.3s;
+  line-height: 50px;
+}
+
+.sidenav a:hover {
+  color: #282828;
+  background: #f4f4ec;
+}
+.sidenav .closebtn:hover {
+  color: white;
+  background: transparent;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+@media screen and (max-width: 450px) {
+  .sidenav {display: none;}
+  .sidenav a {display: none;}
+  .threelines {display: none;}
+  .calculator-screen { height: 80px;}
+}
+
+@media screen and (max-width: 900px) {
+  .threelines {display: none;}
+}
+
+.selectBtn{
+  font-size: 14px;
+  background-color:#F4F4EC; 
+  width: 180px;
+  font-family: 'Assistant','Raleway';
+  border: 1px solid #D8944E;
+  border-radius: 10px;
+}

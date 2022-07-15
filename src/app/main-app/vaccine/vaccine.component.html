@@ -1,0 +1,115 @@
+<div id="main">
+  <div class="jumbotron jumbotron-fluid" style="background-color:#f4f4ec">
+    <div class="container">
+      <h1 style="font-family: 'Raleway'; font-weight:800; font-size: 25px;">Vaccination Details</h1>
+      <p class="lead">View All Vaccination Records Here</p>
+      <hr class="my-2">
+      <div id="root">
+        <h1 class="text-center p-3">Selected Flock Name :{{flockName| titlecase}}</h1>
+        <h1 class="text-center p-3">Selected Farm Name : {{farmName | titlecase}}</h1>
+        <div class="container pt-3">
+          <div class="row align-items-stretch">
+            <div class="c-dashboardInfo col-lg-3 col-md-3">
+              <div class="wrap">
+                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Total Birds</h4>
+                <span class="hind-font caption-12 c-dashboardInfo__count">{{Totalbirds}}</span>
+              </div>
+            </div>
+            <div class="c-dashboardInfo col-lg-3 col-md-3">
+              <div class="wrap">
+                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Vaccinated Birds</h4>
+                <span class="hind-font caption-12 c-dashboardInfo__count">{{totalVaccinatedBirds}}</span>
+              </div>
+            </div>
+            <div class="c-dashboardInfo col-lg-3 col-md-3">
+              <div class="wrap">
+                <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Remaining Birds</h4>
+                <span class="hind-font caption-12 c-dashboardInfo__count">{{remaining}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div style="margin-top: 10px ;">
+      <div class="text-right">
+        <button class="btn text-light" style="background-color: #D8944E;" (click)="openDialog()">{{'HOME.ADDDATA' |
+          translate}}</button>
+      </div>
+      <mat-form-field appearance="standard">
+        <mat-label>Search</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search Here" #input>
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort matTableExporter #exporter="matTableExporter"
+          [hiddenColumns]="[5,6]">
+
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef class="form" mat-sort-header>Date</th>
+            <td mat-cell *matCellDef="let row"> {{row.date | date}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="medicine">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="form">Medicine</th>
+            <td mat-cell *matCellDef="let row" style="padding-left:6px; color: red;"> {{row.medicine}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="form">Price</th>
+            <td mat-cell *matCellDef="let row"> {{row.price}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="form">Quantity</th>
+            <td mat-cell *matCellDef="let row"> {{row.quantity}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="vaccinated">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="form">Total Vaccinated</th>
+            <td mat-cell *matCellDef="let row;"> {{row.vaccinated}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="note">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="form"> Note </th>
+            <td mat-cell *matCellDef="let row"> {{row.note}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-icon-button color="primary" (click)="editData(row)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteData(row._id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">Select a Farm{{input.value}}</td>
+          </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[40, 80, 120, 160]" aria-label="Select page of users"></mat-paginator>
+      </div>
+      <div class="m-3" style="align-items: flex-end; display: flex; flex-direction: column;">
+        <button class="btn text-light mt-3 mb-3" style="background-color: #D8944E; display: flex;" (click)="print()">
+          <mat-icon class="material-icons-outlined" style="color: white;">print</mat-icon>{{'HOME.PRINT' |
+          translate}}
+        </button>
+
+        <button class="btn text-light mt-3 mb-3" style="background-color: #217346; display: flex;"
+          (click)="exporter.exportTable('xlsx',{fileName:'VaccineRecords'})">
+          <mat-icon class="material-icons-outlined" style="color: white;">upload_file</mat-icon>
+          Export to Excel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

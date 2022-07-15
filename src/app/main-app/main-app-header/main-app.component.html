@@ -1,0 +1,4 @@
+<div id="main">
+<app-header *ngIf="showHeader"></app-header>
+</div>
+<router-outlet (activate)="hideHeader()"></router-outlet>

@@ -1,0 +1,46 @@
+<h1 class="display-4 text-center" style="font-family: 'Assitant', sans-serif;">Vaccination Records</h1>
+<div mat-dialog-content>
+    <form [formGroup]="vaccineForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Select Date</mat-label>
+            <input formControlName="date" matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Medicine</mat-label>
+            <input formControlName="medicine" matInput type="text" placeholder="Enter Medicine Details">
+            <mat-hint>Enter Medicine name here</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input formControlName="price" matInput type="number" placeholder="Enter price of medicine">
+            <mat-hint>Enter Medicine price here</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Quantity</mat-label>
+            <input formControlName="quantity" matInput type="number" placeholder="Enter Quantity">
+            <mat-hint>Enter Quantity here</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Total Vaccinated Birds</mat-label>
+            <input formControlName="vaccinated" matInput type="number" placeholder="Enter number of vaccinated birds">
+            <mat-hint>Enter number of vaccinated birds details here</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Note</mat-label>
+            <textarea formControlName="note" matInput placeholder="Enter Any Additional Information Here."></textarea>
+            <mat-hint>Any Additional Information</mat-hint>
+        </mat-form-field>
+    </form>
+</div>
+
+<div mat-dialog-actions [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+    <button style="margin-left: 8px;" mat-raised-button color="primary" (click)="AddData()">{{actionBtn}}</button>
+</div>
